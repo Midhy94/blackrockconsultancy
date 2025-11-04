@@ -1,0 +1,415 @@
+@import 'variables';
+@import 'mixins';
+
+// Header
+.header {
+  background-color: $white;
+  box-shadow: $shadow-sm;
+  position: sticky;
+  top: 0;
+  z-index: $z-sticky;
+  transition: box-shadow $transition-base;
+  
+  &.scrolled {
+    box-shadow: $shadow-md;
+  }
+}
+
+.header-container {
+  @include container;
+  @include flex-between;
+  padding-top: $spacing-md;
+  padding-bottom: $spacing-md;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: $brand-black;
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  
+  &:hover {
+    color: $brand-blue;
+  }
+  
+  img {
+    height: 40px;
+    width: auto;
+  }
+}
+
+.nav-toggle {
+  display: block;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: $brand-black;
+  padding: $spacing-xs;
+  @include focus-visible;
+  
+  @include respond-to(md) {
+    display: none;
+  }
+}
+
+.nav {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: $white;
+  box-shadow: $shadow-lg;
+  padding: $spacing-md;
+  
+  @include respond-to(md) {
+    display: flex;
+    position: static;
+    box-shadow: none;
+    padding: 0;
+  }
+  
+  &.active {
+    display: block;
+  }
+  
+  &__list {
+    @include respond-to(md) {
+      display: flex;
+      align-items: center;
+      gap: $spacing-lg;
+    }
+  }
+  
+  &__item {
+    margin-bottom: $spacing-sm;
+    
+    @include respond-to(md) {
+      margin-bottom: 0;
+    }
+  }
+  
+  &__link {
+    display: block;
+    padding: $spacing-sm;
+    color: $brand-black;
+    font-weight: 500;
+    border-radius: $border-radius-sm;
+    transition: all $transition-fast;
+    @include focus-visible;
+    
+    &:hover {
+      background-color: $light-gray;
+      color: $brand-blue;
+    }
+    
+    &.active {
+      color: $brand-blue;
+    }
+  }
+}
+
+// Main content
+.main {
+  min-height: calc(100vh - 200px);
+}
+
+// Hero section
+.hero {
+  background: linear-gradient(135deg, rgba(39, 100, 243, 0.05) 0%, rgba(26, 27, 33, 0.05) 100%);
+  padding: $spacing-3xl $spacing-md;
+  text-align: center;
+  
+  @include respond-to(md) {
+    padding: $spacing-3xl * 1.5 $spacing-md;
+  }
+  
+  &__title {
+    font-size: 2rem;
+    margin-bottom: $spacing-md;
+    color: $brand-black;
+    
+    @include respond-to(md) {
+      font-size: 3.5rem;
+    }
+  }
+  
+  &__tagline {
+    font-size: $font-size-large;
+    color: $muted-gray;
+    margin-bottom: $spacing-xl;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  &__cta {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+    align-items: center;
+    
+    @include respond-to(sm) {
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+}
+
+// Section
+.section {
+  padding: $spacing-3xl $spacing-md;
+  
+  &__title {
+    text-align: center;
+    margin-bottom: $spacing-lg;
+  }
+  
+  &__subtitle {
+    text-align: center;
+    color: $muted-gray;
+    font-size: $font-size-large;
+    max-width: 700px;
+    margin: 0 auto $spacing-2xl;
+  }
+}
+
+// Container
+.container {
+  @include container;
+}
+
+// Grid layouts
+.grid {
+  @include grid(1, $spacing-lg);
+  
+  @include respond-to(sm) {
+    @include grid(2, $spacing-lg);
+  }
+  
+  @include respond-to(lg) {
+    @include grid(3, $spacing-xl);
+  }
+  
+  &--2 {
+    @include grid(1, $spacing-lg);
+    
+    @include respond-to(md) {
+      @include grid(2, $spacing-lg);
+    }
+  }
+  
+  &--4 {
+    @include grid(1, $spacing-lg);
+    
+    @include respond-to(sm) {
+      @include grid(2, $spacing-lg);
+    }
+    
+    @include respond-to(lg) {
+      @include grid(4, $spacing-lg);
+    }
+  }
+}
+
+// Card
+.card {
+  background: $white;
+  border-radius: $border-radius-lg;
+  padding: $spacing-xl;
+  box-shadow: $shadow-md;
+  transition: all $transition-base;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-xl;
+  }
+  
+  &__icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(39, 100, 243, 0.1);
+    border-radius: $border-radius-md;
+    @include flex-center;
+    margin-bottom: $spacing-md;
+    font-size: 1.5rem;
+  }
+  
+  &__title {
+    font-size: $font-size-h4;
+    margin-bottom: $spacing-sm;
+  }
+  
+  &__text {
+    color: $muted-gray;
+    margin-bottom: $spacing-md;
+    flex-grow: 1;
+  }
+  
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-xs;
+    color: $brand-blue;
+    font-weight: 600;
+    
+    &:hover {
+      gap: $spacing-sm;
+    }
+  }
+}
+
+// Footer
+.footer {
+  background-color: $brand-black;
+  color: $white;
+  padding: $spacing-3xl $spacing-md $spacing-xl;
+  
+  &__container {
+    @include container;
+  }
+  
+  &__grid {
+    @include grid(1, $spacing-xl);
+    
+    @include respond-to(sm) {
+      @include grid(2, $spacing-xl);
+    }
+    
+    @include respond-to(lg) {
+      @include grid(4, $spacing-xl);
+    }
+  }
+  
+  &__section {
+    h4 {
+      color: $white;
+      margin-bottom: $spacing-md;
+      font-size: $font-size-h4;
+    }
+    
+    p, a {
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: $spacing-sm;
+    }
+    
+    a:hover {
+      color: $white;
+    }
+  }
+  
+  &__links {
+    list-style: none;
+    
+    li {
+      margin-bottom: $spacing-xs;
+    }
+    
+    a {
+      color: rgba(255, 255, 255, 0.8);
+      transition: color $transition-fast;
+      
+      &:hover {
+        color: $white;
+      }
+    }
+  }
+  
+  &__social {
+    display: flex;
+    gap: $spacing-md;
+    margin-top: $spacing-md;
+    
+    a {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      @include flex-center;
+      transition: all $transition-fast;
+      
+      &:hover {
+        background: $brand-blue;
+        transform: translateY(-2px);
+      }
+    }
+  }
+  
+  &__bottom {
+    margin-top: $spacing-2xl;
+    padding-top: $spacing-xl;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: $font-size-small;
+  }
+}
+
+// Newsletter form
+.newsletter {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  
+  @include respond-to(sm) {
+    flex-direction: row;
+  }
+  
+  input {
+    flex: 1;
+    padding: $spacing-sm $spacing-md;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: $border-radius-md;
+    background: rgba(255, 255, 255, 0.1);
+    color: $white;
+    @include focus-visible;
+    
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+  
+  button {
+    @include button-primary;
+    white-space: nowrap;
+  }
+}
+
+// WhatsApp button
+.whatsapp-button {
+  position: fixed;
+  bottom: $spacing-lg;
+  right: $spacing-lg;
+  width: 60px;
+  height: 60px;
+  background-color: #25D366;
+  border-radius: 50%;
+  @include flex-center;
+  box-shadow: $shadow-lg;
+  z-index: $z-whatsapp;
+  transition: all $transition-base;
+  text-decoration: none;
+  
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: $shadow-xl;
+  }
+  
+  &:focus {
+    outline: 2px solid #25D366;
+    outline-offset: 2px;
+  }
+  
+  svg {
+    width: 32px;
+    height: 32px;
+    fill: $white;
+  }
+}
+

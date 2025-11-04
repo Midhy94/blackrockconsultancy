@@ -1,0 +1,124 @@
+@import 'variables';
+@import 'mixins';
+
+// Reset and base styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: $font-size-base;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $font-sans;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  color: $brand-black;
+  background-color: $white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Typography
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: $line-height-tight;
+  margin-bottom: $spacing-md;
+  color: $brand-black;
+}
+
+h1 {
+  font-size: $font-size-h1;
+  
+  @include respond-to(md) {
+    font-size: 3rem;
+  }
+}
+
+h2 {
+  font-size: $font-size-h2;
+  
+  @include respond-to(md) {
+    font-size: 2.5rem;
+  }
+}
+
+h3 {
+  font-size: $font-size-h3;
+}
+
+h4 {
+  font-size: $font-size-h4;
+}
+
+p {
+  margin-bottom: $spacing-md;
+  color: $muted-gray;
+}
+
+a {
+  color: $brand-blue;
+  text-decoration: none;
+  transition: color $transition-fast;
+  
+  &:hover {
+    color: darken($brand-blue, 10%);
+  }
+  
+  &:focus {
+    outline: 2px solid $brand-blue;
+    outline-offset: 2px;
+    border-radius: $border-radius-sm;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+// Lists
+ul, ol {
+  list-style: none;
+}
+
+// Forms
+input, textarea, select {
+  font-family: $font-sans;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+}
+
+button {
+  font-family: $font-sans;
+}
+
+// Accessibility
+:focus-visible {
+  outline: 2px solid $brand-blue;
+  outline-offset: 2px;
+}
+
+// Skip to main content link
+.skip-link {
+  @include sr-only;
+  
+  &:focus {
+    position: fixed;
+    top: $spacing-sm;
+    left: $spacing-sm;
+    z-index: $z-tooltip;
+    width: auto;
+    height: auto;
+    padding: $spacing-sm $spacing-md;
+    background-color: $brand-blue;
+    color: $white;
+    clip: auto;
+  }
+}
+
