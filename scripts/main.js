@@ -163,5 +163,71 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
+  
+  // Video background - handle all hero videos on all pages
+  const heroVideos = document.querySelectorAll('.hero__video');
+  heroVideos.forEach(function(heroVideo) {
+    if (heroVideo.tagName === 'IFRAME') {
+      // YouTube iframe - ensure it loads properly
+      heroVideo.addEventListener('load', function() {
+        console.log('YouTube video iframe loaded and should be playing');
+      });
+    } else if (heroVideo.tagName === 'VIDEO') {
+      // Regular video element - ensure looping background video
+      heroVideo.muted = true;
+      heroVideo.volume = 0;
+      heroVideo.loop = true;
+      heroVideo.setAttribute('muted', '');
+      heroVideo.setAttribute('loop', '');
+      heroVideo.setAttribute('playsinline', '');
+      heroVideo.setAttribute('webkit-playsinline', 'true');
+      heroVideo.setAttribute('x5-playsinline', 'true');
+      
+      // Ensure video loops continuously
+      heroVideo.addEventListener('ended', function() {
+        heroVideo.currentTime = 0;
+        heroVideo.play().catch(() => {});
+      });
+      
+      // Handle video loading and playback
+      const playVideo = function() {
+        if (heroVideo.readyState >= 2) {
+          const playPromise = heroVideo.play();
+          if (playPromise !== undefined) {
+            playPromise.then(function() {
+              console.log('Hero background video playing successfully');
+            }).catch(function(error) {
+              console.log('Video play failed:', error);
+              // Retry after a short delay
+              setTimeout(playVideo, 1000);
+            });
+          }
+        }
+      };
+      
+      // Multiple event listeners to ensure video plays
+      heroVideo.addEventListener('loadeddata', playVideo);
+      heroVideo.addEventListener('canplay', playVideo);
+      heroVideo.addEventListener('canplaythrough', playVideo);
+      heroVideo.addEventListener('loadedmetadata', playVideo);
+      
+      // Try to play immediately if video is already loaded
+      if (heroVideo.readyState >= 2) {
+        playVideo();
+      }
+      
+      // Fallback attempts to play video
+      setTimeout(playVideo, 500);
+      setTimeout(playVideo, 1500);
+      setTimeout(playVideo, 3000);
+      
+      // Handle visibility change to resume playback when tab becomes visible
+      document.addEventListener('visibilitychange', function() {
+        if (!document.hidden && heroVideo.paused) {
+          playVideo();
+        }
+      });
+    }
+  });
 });
 

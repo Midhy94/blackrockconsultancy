@@ -14,29 +14,29 @@
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
   
-   <!-- Header -->
- <header class="header" role="banner">
-  <div class="header-container">
-    <a href="index.html" class="logo" aria-label="Blackrock Consultancy Home">
-      <span>Blackrock Consultancy</span>
-    </a>
-    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="main-nav">
-      ☰
-    </button>
-    <nav class="nav" id="main-nav" role="navigation" aria-label="Main navigation">
-      <ul class="nav__list">
-        <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
-        <li class="nav__item"><a href="about.html" class="nav__link">About</a></li>
-        <li class="nav__item"><a href="services.html" class="nav__link">Services</a></li>
-        <li class="nav__item"><a href="careers.html" class="nav__link">Careers</a></li>
-        <li class="nav__item"><a href="clients.html" class="nav__link">Clients</a></li>
-        <li class="nav__item"><a href="media.html" class="nav__link">Media</a></li>
-        <li class="nav__item"><a href="blog.html" class="nav__link active">Blog</a></li>
-        <li class="nav__item"><a href="contact.html" class="nav__link">Contact</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+  <!-- Header -->
+  <header class="header" role="banner">
+    <div class="header-container">
+      <a href="index.html" class="logo" aria-label="Blackrock Consultancy Home">
+        <span>Blackrock Consultancy</span>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="main-nav">
+        ☰
+      </button>
+      <nav class="nav" id="main-nav" role="navigation" aria-label="Main navigation">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
+          <li class="nav__item"><a href="about.html" class="nav__link">About</a></li>
+          <li class="nav__item"><a href="services.html" class="nav__link">Services</a></li>
+          <li class="nav__item"><a href="careers.html" class="nav__link">Careers</a></li>
+          <li class="nav__item"><a href="clients.html" class="nav__link">Clients</a></li>
+          <li class="nav__item"><a href="media.html" class="nav__link">Media</a></li>
+          <li class="nav__item"><a href="blog.html" class="nav__link active">Blog</a></li>
+          <li class="nav__item"><a href="contact.html" class="nav__link">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
   
   <main id="main-content">
     <nav class="breadcrumbs" aria-label="Breadcrumb">
@@ -46,7 +46,12 @@
       </ol>
     </nav>
     
-    <section class="hero" aria-labelledby="blog-title">
+    <section class="hero hero--inner" aria-labelledby="blog-title">
+      <video class="hero__video" autoplay muted loop playsinline preload="auto" aria-hidden="true" webkit-playsinline="true" x5-playsinline="true">
+        <source src="https://www.pexels.com/download/video/8493729/" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="hero__overlay"></div>
       <div class="container">
         <h1 id="blog-title" class="hero__title">Our Blog</h1>
         <p class="hero__tagline">Insights, tips, and updates on overseas recruitment and career opportunities</p>
@@ -57,42 +62,81 @@
       <div class="container">
         <div class="grid">
           <article class="card">
-            <div class="card__icon">📝</div>
+            <div class="card__icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+            </div>
             <h3 class="card__title">Top 10 Countries for International Job Seekers in 2024</h3>
             <p class="card__text">Explore the best destinations for international job opportunities, including visa requirements, salary expectations, and quality of life. Published: February 1, 2024</p>
             <a href="#" class="card__link">Read More →</a>
           </article>
           
           <article class="card">
-            <div class="card__icon">💡</div>
+            <div class="card__icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="16" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+              </svg>
+            </div>
             <h3 class="card__title">How to Prepare for Your Overseas Job Interview</h3>
             <p class="card__text">Essential tips and strategies to ace your international job interview, including cultural considerations and common questions. Published: January 25, 2024</p>
             <a href="#" class="card__link">Read More →</a>
           </article>
           
           <article class="card">
-            <div class="card__icon">🌍</div>
+            <div class="card__icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+            </div>
             <h3 class="card__title">Understanding Work Visa Requirements: A Complete Guide</h3>
             <p class="card__text">Navigate the complex world of work visas with our comprehensive guide covering different countries and visa types. Published: January 15, 2024</p>
             <a href="#" class="card__link">Read More →</a>
           </article>
           
           <article class="card">
-            <div class="card__icon">📊</div>
+            <div class="card__icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="20" x2="18" y2="10"></line>
+                <line x1="12" y1="20" x2="12" y2="4"></line>
+                <line x1="6" y1="20" x2="6" y2="14"></line>
+              </svg>
+            </div>
             <h3 class="card__title">Global Job Market Trends: What Employers Are Looking For</h3>
             <p class="card__text">Stay ahead with insights into current job market trends, in-demand skills, and what employers value most in 2024. Published: January 10, 2024</p>
             <a href="#" class="card__link">Read More →</a>
           </article>
           
           <article class="card">
-            <div class="card__icon">✈️</div>
+            <div class="card__icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 16v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="7" cy="7" r="4"></circle>
+                <path d="M16 7h6"></path>
+                <path d="M19 4v6"></path>
+              </svg>
+            </div>
             <h3 class="card__title">Relocating for Work: A Practical Guide</h3>
             <p class="card__text">Everything you need to know about relocating for work, from finding accommodation to adapting to a new culture. Published: January 5, 2024</p>
             <a href="#" class="card__link">Read More →</a>
           </article>
           
           <article class="card">
-            <div class="card__icon">🎯</div>
+            <div class="card__icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <circle cx="12" cy="12" r="6"></circle>
+                <circle cx="12" cy="12" r="2"></circle>
+              </svg>
+            </div>
             <h3 class="card__title">Building Your International Career: Step-by-Step</h3>
             <p class="card__text">A roadmap to building a successful international career, including skill development and networking strategies. Published: December 28, 2023</p>
             <a href="#" class="card__link">Read More →</a>

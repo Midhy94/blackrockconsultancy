@@ -14,10 +14,15 @@
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
   
+  <!-- Header -->
   <header class="header" role="banner">
     <div class="header-container">
-      <a href="index.html" class="logo" aria-label="Blackrock Consultancy Home"><span>Blackrock Consultancy</span></a>
-      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="main-nav">☰</button>
+      <a href="index.html" class="logo" aria-label="Blackrock Consultancy Home">
+        <span>Blackrock Consultancy</span>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="main-nav">
+        ☰
+      </button>
       <nav class="nav" id="main-nav" role="navigation" aria-label="Main navigation">
         <ul class="nav__list">
           <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
@@ -28,15 +33,18 @@
           <li class="nav__item"><a href="media.html" class="nav__link">Media</a></li>
           <li class="nav__item"><a href="blog.html" class="nav__link">Blog</a></li>
           <li class="nav__item"><a href="contact.html" class="nav__link">Contact</a></li>
-          <li class="nav__item"><a href="candidate-login.html" class="nav__link btn btn--outline btn--small">Candidate Login</a></li>
-          <li class="nav__item"><a href="employer-portal.html" class="nav__link active btn btn--primary btn--small">Employer Portal</a></li>
         </ul>
       </nav>
     </div>
   </header>
   
   <main id="main-content">
-    <section class="hero" aria-labelledby="portal-title">
+    <section class="hero hero--inner" aria-labelledby="portal-title">
+      <video class="hero__video" autoplay muted loop playsinline preload="auto" aria-hidden="true" webkit-playsinline="true" x5-playsinline="true">
+        <source src="https://www.pexels.com/download/video/8493729/" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="hero__overlay"></div>
       <div class="container">
         <div style="max-width: 500px; margin: 0 auto; background: white; padding: 3rem; border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);">
           <h1 id="portal-title" class="hero__title" style="font-size: 2rem; margin-bottom: 1rem;">Employer Portal</h1>
@@ -80,22 +88,49 @@
         <h2 class="section__title">Employer Benefits</h2>
         <div class="grid">
           <article class="card">
-            <div class="card__icon">📋</div>
+            <div class="card__icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+              </svg>
+            </div>
             <h3 class="card__title">Post Jobs Instantly</h3>
             <p class="card__text">Post job openings and reach thousands of qualified candidates worldwide.</p>
           </article>
           <article class="card">
-            <div class="card__icon">👥</div>
+            <div class="card__icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </div>
             <h3 class="card__title">Manage Candidates</h3>
             <p class="card__text">Track applications, review resumes, and manage your recruitment pipeline.</p>
           </article>
           <article class="card">
-            <div class="card__icon">📊</div>
+            <div class="card__icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="20" x2="18" y2="10"></line>
+                <line x1="12" y1="20" x2="12" y2="4"></line>
+                <line x1="6" y1="20" x2="6" y2="14"></line>
+              </svg>
+            </div>
             <h3 class="card__title">Analytics Dashboard</h3>
             <p class="card__text">Get insights into your recruitment performance with detailed analytics.</p>
           </article>
           <article class="card">
-            <div class="card__icon">🤝</div>
+            <div class="card__icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </div>
             <h3 class="card__title">Dedicated Support</h3>
             <p class="card__text">Access to our team of recruitment experts for personalized assistance.</p>
           </article>

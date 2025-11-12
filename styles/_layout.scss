@@ -12,7 +12,7 @@
   z-index: $z-sticky;
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   border-bottom: none;
-  padding: $spacing-md 0;
+  padding: $spacing-sm 0;
   transform: translateY(0);
   opacity: 1;
   
@@ -394,35 +394,31 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background: linear-gradient(135deg, rgba(39, 100, 243, 0.1) 0%, rgba(26, 27, 33, 0.15) 100%);
+  background-image: 
+    linear-gradient(135deg, rgba(39, 100, 243, 0.15) 0%, rgba(26, 27, 33, 0.2) 100%),
+    url('data:image/svg+xml;utf8,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(39, 100, 243, 0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+  background-size: cover, 100px 100px;
+  background-position: center, 0 0;
   
   @include respond-to(md) {
     padding: $spacing-3xl * 1.5 $spacing-md;
-    min-height: 600px;
+    min-height: 700px;
   }
   
-  // Video background
-  &__video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 0;
+  // Inner pages have less height than home page
+  &.hero--inner {
+    min-height: 400px;
+    padding: $spacing-2xl $spacing-md;
+    
+    @include respond-to(md) {
+      min-height: 500px;
+      padding: $spacing-3xl $spacing-md;
+    }
   }
   
-  // Overlay for better text readability
-  &__overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(39, 100, 243, 0.7) 0%, rgba(26, 27, 33, 0.8) 100%);
-    z-index: 1;
-  }
-  
-  // Fallback background if video doesn't load
+  // Enhanced background for inner pages (without video)
+  // Default beautiful gradient background for all heroes
   &::before {
     content: '';
     position: absolute;
@@ -430,9 +426,108 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(39, 100, 243, 0.05) 0%, rgba(26, 27, 33, 0.05) 100%);
+    background: linear-gradient(135deg, rgba(39, 100, 243, 0.2) 0%, rgba(26, 27, 33, 0.3) 50%, rgba(39, 100, 243, 0.15) 100%);
+    background-image: 
+      radial-gradient(circle at 20% 50%, rgba(39, 100, 243, 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(26, 27, 33, 0.2) 0%, transparent 50%),
+      linear-gradient(135deg, rgba(39, 100, 243, 0.1) 0%, rgba(26, 27, 33, 0.15) 100%);
+    background-size: 100% 100%, 100% 100%, 100% 100%;
     z-index: 0;
+    opacity: 1;
   }
+  
+  // Hide gradient background when video is present (video hero uses video instead)
+  &:has(.hero__video)::before {
+    background: linear-gradient(135deg, rgba(39, 100, 243, 0.05) 0%, rgba(26, 27, 33, 0.05) 100%);
+    background-image: none;
+  }
+  
+  // Additional pattern overlay for non-video heroes
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.03) 50%, transparent 70%),
+      linear-gradient(-45deg, transparent 30%, rgba(255, 255, 255, 0.03) 50%, transparent 70%);
+    background-size: 200px 200px, 200px 200px;
+    background-position: 0 0, 100px 100px;
+    opacity: 0.5;
+    z-index: 0;
+    pointer-events: none;
+  }
+  
+  // Hide pattern overlay when video is present
+  &:has(.hero__video)::after {
+    display: none;
+  }
+  
+  // Video background wrapper
+  &__video-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+    background-color: #1A1B21;
+  }
+  
+  // Video background (YouTube iframe or video element)
+  &__video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+    border: none;
+    background-color: #1A1B21;
+    pointer-events: none;
+    
+    // Ensure video covers entire hero section
+    min-width: 100%;
+    min-height: 100%;
+    
+    // Ensure video is visible and playing (hide controls)
+    &::-webkit-media-controls {
+      display: none !important;
+    }
+    
+    &::-webkit-media-controls-enclosure {
+      display: none !important;
+    }
+    
+    &::-webkit-media-controls-panel {
+      display: none !important;
+    }
+    
+    &::-webkit-media-controls-play-button {
+      display: none !important;
+    }
+    
+    &::-webkit-media-controls-start-playback-button {
+      display: none !important;
+    }
+  }
+  
+  // Overlay for better text readability (reduced opacity for more video visibility)
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(39, 100, 243, 0.4) 0%, rgba(26, 27, 33, 0.5) 100%);
+    z-index: 1;
+  }
+  
   
   .container {
     position: relative;
@@ -448,6 +543,8 @@
     @include respond-to(md) {
       font-size: 3.5rem;
     }
+    
+    
   }
   
   &__tagline {
@@ -458,6 +555,7 @@
     margin-left: auto;
     margin-right: auto;
     text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+   
   }
   
   &__cta {
@@ -484,6 +582,54 @@
         color: $white;
       }
     }
+  }
+}
+
+.hero--inner {
+  background-image:
+    linear-gradient(135deg, rgba(26, 27, 33, 0.75) 0%, rgba(39, 100, 243, 0.65) 100%),
+    url('https://images.pexels.com/photos/313782/pexels-photo-313782.jpeg?auto=compress&cs=tinysrgb&w=1920');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: $white;
+
+  @include respond-to(md) {
+    background-attachment: fixed;
+  }
+
+  &::before {
+    background: linear-gradient(135deg, rgba(26, 27, 33, 0.7) 0%, rgba(39, 100, 243, 0.6) 100%);
+    opacity: 0.95;
+  }
+
+  &::after {
+    background-image:
+      radial-gradient(circle at top left, rgba(255, 255, 255, 0.18), transparent 55%),
+      radial-gradient(circle at bottom right, rgba(39, 100, 243, 0.25), transparent 60%);
+    opacity: 0.6;
+  }
+
+  .hero__title {
+    color: $white;
+    text-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  }
+
+  .hero__tagline {
+    color: rgba(255, 255, 255, 0.92);
+    text-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.hero--home {
+  .hero__title {
+    color: $white !important;
+    text-shadow: 0 8px 24px rgba(0, 0, 0, 0.5) !important;
+  }
+
+  .hero__tagline {
+    color: rgba(255, 255, 255, 0.95) !important;
+    text-shadow: 0 4px 18px rgba(0, 0, 0, 0.4) !important;
   }
 }
 
@@ -560,13 +706,19 @@
   }
   
   &__icon {
-    width: 60px;
-    height: 60px;
-    background: rgba(39, 100, 243, 0.1);
-    border-radius: $border-radius-md;
+    width: 64px;
+    height: 64px;
+    background: $brand-blue;
+    border-radius: 50%;
     @include flex-center;
     margin-bottom: $spacing-md;
     font-size: 1.5rem;
+    
+    svg {
+      width: 32px;
+      height: 32px;
+      color: $white;
+    }
   }
   
   &__title {
@@ -738,6 +890,7 @@
     width: 32px;
     height: 32px;
     fill: $white;
+    stroke: none;
   }
 }
 
