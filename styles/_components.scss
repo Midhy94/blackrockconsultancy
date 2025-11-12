@@ -1,3 +1,4 @@
+@use "sass:color";
 @import 'variables';
 @import 'mixins';
 
@@ -191,7 +192,7 @@
 
 // Stats
 .stats {
-  background: linear-gradient(135deg, $brand-blue 0%, darken($brand-blue, 10%) 100%);
+  background: linear-gradient(135deg, $brand-blue 0%, color.scale($brand-blue, $lightness: -10%) 100%);
   color: $white;
   padding: $spacing-3xl $spacing-md;
   

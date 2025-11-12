@@ -167,9 +167,17 @@
     text-overflow: ellipsis;
   }
   
+  &__highlight {
+    color: #2764F3;
+  }
+  
   &:hover {
     color: $brand-blue;
     transform: translateY(-1px);
+    
+    .logo__highlight {
+      color: #2764F3;
+    }
   }
   
   img {
