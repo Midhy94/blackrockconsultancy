@@ -181,7 +181,7 @@
   }
   
   img {
-    height: 40px;
+    height: 55px;
     width: auto;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     flex-shrink: 0;
@@ -772,6 +772,23 @@
     
     @include respond-to(lg) {
       @include grid(4, $spacing-xl);
+    }
+  }
+  
+  &__logo {
+    display: inline-block;
+    margin-bottom: $spacing-md;
+    transition: opacity 0.3s ease;
+    
+    &:hover {
+      opacity: 0.9;
+    }
+    
+    &-image {
+      height: 50px;
+      width: auto;
+      filter: brightness(0) invert(1);
+      transition: opacity 0.3s ease;
     }
   }
   
