@@ -15,10 +15,11 @@ A production-ready multipage website for BLACK ROCKS CONSULTANCY - Manpower Recr
 
 ## Brand Colors
 
-- Primary Dark: `#333333`
-- Accent Red: `#EF4036`
-- White
-- Light gray (backgrounds only when needed)
+- Primary Red: `#E53935`
+- Dark Gray / Black: `#1A1A1A`
+- Secondary Gray: `#4A4A4A`
+- Light Background: `#F7F7F7`
+- White: `#FFFFFF`
 
 ## Installation
 
@@ -78,28 +79,31 @@ A production-ready multipage website for BLACK ROCKS CONSULTANCY - Manpower Recr
 blackrockconsultancy/
 ├── app/
 │   ├── api/contact/route.ts    # Contact form API
-│   ├── about/
-│   ├── services/
-│   ├── industries/
-│   ├── process/
-│   ├── compliance/
-│   ├── candidate-support/
-│   ├── clients/
-│   ├── global-reach/
-│   ├── contact/
-│   ├── privacy-policy/
-│   ├── terms/
+│   ├── about/page.tsx
+│   ├── services/page.tsx
+│   ├── industries/page.tsx
+│   ├── process/page.tsx
+│   ├── global-reach/page.tsx
+│   ├── contact/page.tsx
 │   ├── layout.tsx
-│   ├── page.tsx
-│   ├── globals.css
-│   ├── sitemap.ts
-│   └── robots.ts
+│   ├── page.tsx                # Home
+│   └── globals.css
 ├── components/
 │   ├── Navbar.tsx
-│   └── Footer.tsx
-├── lib/
-│   ├── constants.ts
-│   └── utils.ts
+│   ├── Footer.tsx
+│   ├── PageHeader.tsx
+│   └── sections/
+│       ├── Hero.tsx
+│       ├── About.tsx
+│       ├── CoreValues.tsx
+│       ├── Services.tsx
+│       ├── Industries.tsx
+│       ├── RecruitmentProcess.tsx
+│       ├── GlobalReach.tsx
+│       ├── ClientBenefits.tsx
+│       ├── CandidateSupport.tsx
+│       ├── CTASection.tsx
+│       └── Contact.tsx
 ├── .env.example
 ├── tailwind.config.js
 ├── next.config.js
@@ -134,13 +138,14 @@ blackrockconsultancy/
 
 ## Features
 
-- Fullscreen overlay navigation menu
-- Responsive mobile-first design
-- Contact form with Nodemailer
-- SEO metadata on all pages
-- Sitemap and robots.txt
-- WhatsApp and Call buttons on contact page
+- Sticky header with smooth scroll navigation
+- Responsive mobile-first design (mobile, tablet, desktop)
+- Contact form with API route (SMTP configurable)
+- SEO metadata
+- WhatsApp and Call buttons on contact section
 - Google Maps embed
+- Framer Motion animations and hover micro-interactions
+- Upwork-inspired clean, professional UI
 
 ## Contact Form
 
