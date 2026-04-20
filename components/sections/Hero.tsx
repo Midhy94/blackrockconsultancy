@@ -51,8 +51,8 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="mt-6 text-lg sm:text-xl text-white/90 leading-relaxed"
           >
-            BLACK ROCKS CONSULTANCY specializes in Manpower Recruitment & Supply and HR support for overseas companies,
-            connecting skilled professionals with opportunities in the GCC and European markets.
+            BLACK ROCKS CONSULTANCY specializes in overseas manpower recruitment and HR support, connecting skilled,
+            semi-skilled, and professional candidates with international employers across the GCC and European markets.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}

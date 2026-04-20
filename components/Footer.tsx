@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook } from 'lucide-react'
 
 const footerLinks = {
@@ -19,6 +18,9 @@ const socialLinks = [
   { icon: Facebook, href: '#', label: 'Facebook' },
 ]
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH?.replace(/^\/+|\/+$/g, '') ?? ''
+const lightLogoSrc = `/${[basePath, 'SBR-logo-Light.png'].filter(Boolean).join('/')}`
+
 export default function Footer() {
   return (
     <footer className="bg-dark text-white">
@@ -27,8 +29,8 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block">
-              <Image
-                src="/SBR-logo-Light.png"
+              <img
+                src={lightLogoSrc}
                 alt="BLACK ROCKS CONSULTANCY"
                 width={180}
                 height={48}

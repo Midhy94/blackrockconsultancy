@@ -2,28 +2,32 @@
 
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { BadgeCheck, Clock, Eye, Calendar } from 'lucide-react'
+import { Globe, ListOrdered, LifeBuoy, Briefcase } from 'lucide-react'
 
 const benefits = [
   {
-    icon: BadgeCheck,
-    title: 'Access to verified manpower',
-    description: 'Pre-screened candidates ready for your requirements.',
+    icon: Globe,
+    title: 'Global Reach',
+    description:
+      'We currently service Saudi Arabia and are expanding across the UAE, Qatar, Oman, Kuwait, Bahrain, and European markets including the UK, Germany, Portugal, Italy, and France.',
   },
   {
-    icon: Clock,
-    title: 'Reduced hiring effort',
-    description: 'Save time and resources with our end-to-end support.',
+    icon: ListOrdered,
+    title: 'Structured Process',
+    description:
+      'From requirement understanding and screening to documentation and deployment, our process ensures timely and legally compliant manpower solutions.',
   },
   {
-    icon: Eye,
-    title: 'Transparent recruitment process',
-    description: 'Clear communication at every step of the journey.',
+    icon: LifeBuoy,
+    title: 'Comprehensive Support',
+    description:
+      'We provide pre-departure orientation, cultural training, and post-placement support for candidates.',
   },
   {
-    icon: Calendar,
-    title: 'Reliable hiring timelines',
-    description: 'Commitment to deadlines that work for your business.',
+    icon: Briefcase,
+    title: 'Client Efficiency',
+    description:
+      'We reduce employer workload by delivering verified, pre-screened manpower through reliable and coordinated timelines.',
   },
 ]
 
@@ -53,10 +57,10 @@ export default function ClientBenefits() {
             className="order-1 lg:order-2"
           >
             <h2 className="font-heading font-bold text-3xl sm:text-4xl text-dark">
-              Client <span className="text-primary">Benefits</span>
+              Why Partner with <span className="text-primary">Us?</span>
             </h2>
             <p className="mt-4 text-secondary max-w-2xl">
-              Why businesses choose BLACK ROCKS CONSULTANCY for their staffing needs
+              What sets BLACK ROCKS CONSULTANCY apart for employers and candidates
             </p>
           </motion.div>
         </div>

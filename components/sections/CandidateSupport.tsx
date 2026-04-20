@@ -7,23 +7,27 @@ import { FileText, Globe, Plane, MessageCircle } from 'lucide-react'
 const supportItems = [
   {
     icon: FileText,
-    title: 'Documentation guidance',
-    description: 'Step-by-step assistance with all required paperwork.',
+    title: 'Documentation & visa support',
+    description:
+      'Guidance through legal formalities, biometrics, and visa stamping so you meet employer and regulatory requirements.',
   },
   {
     icon: Globe,
-    title: 'Cultural awareness sessions',
-    description: 'Prepare for your new environment and workplace culture.',
+    title: 'Cultural awareness training',
+    description:
+      'Sessions that prepare you for life and work abroad, aligned with our pre-departure orientation program.',
   },
   {
     icon: Plane,
-    title: 'Travel and settlement assistance',
-    description: 'Support from departure to settling in your new role.',
+    title: 'Travel & settlement',
+    description:
+      'Help with travel procedures and practical steps so you can settle confidently into your new role and location.',
   },
   {
     icon: MessageCircle,
-    title: 'Communication after placement',
-    description: 'Ongoing support and check-ins post-deployment.',
+    title: 'Post-placement communication',
+    description:
+      'We stay in touch after deployment with settlement support aimed at your long-term career success.',
   },
 ]
 

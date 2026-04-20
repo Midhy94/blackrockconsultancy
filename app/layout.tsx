@@ -21,11 +21,13 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: 'BLACK ROCKS CONSULTANCY | Connecting Skills with Global Opportunities',
-  description: 'BLACK ROCKS CONSULTANCY specializes in Manpower Recruitment & Supply and HR support for overseas companies, connecting skilled professionals with opportunities in the GCC and European markets.',
+  description:
+    'Professionally managed overseas manpower recruitment and HR support—registered under MCA and approved by MEA, Government of India—connecting talent with the GCC and Europe.',
   keywords: 'recruitment, manpower, HR support, overseas jobs, GCC, Europe, staffing',
   openGraph: {
     title: 'BLACK ROCKS CONSULTANCY | Connecting Skills with Global Opportunities',
-    description: 'Manpower Recruitment & HR support for overseas companies',
+    description:
+      'Overseas manpower recruitment and HR support—MCA registered, MEA approved—GCC and Europe.',
   },
 }
 

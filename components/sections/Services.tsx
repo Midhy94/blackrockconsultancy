@@ -31,10 +31,10 @@ export default function Services({ showBanner = true }: ServicesProps) {
             <div className="absolute inset-0 bg-dark/50 flex items-center justify-center">
               <div className="text-center text-white">
                 <h2 className="font-heading font-bold text-3xl sm:text-4xl">
-                  Our <span className="text-primary">Services</span>
+                  Our Core <span className="text-primary">Services</span>
                 </h2>
-                <p className="mt-2 text-white/90 max-w-xl mx-auto">
-                  End-to-end recruitment and HR support for overseas placements
+                <p className="mt-2 text-white/90 max-w-xl mx-auto text-sm sm:text-base">
+                  Overseas manpower recruitment, documentation and visa processing, pre-departure orientation, and post-placement support
                 </p>
               </div>
             </div>
@@ -52,7 +52,7 @@ export default function Services({ showBanner = true }: ServicesProps) {
               className="group"
             >
               <Link
-                href={`/services/${service.slug}`}
+                href={service.href}
                 className="block h-full p-6 rounded-2xl bg-light border border-transparent hover:border-primary/20 hover:bg-white hover:shadow-xl transition-all duration-300"
               >
                 <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">

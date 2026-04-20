@@ -45,7 +45,8 @@ export default function RecruitmentProcess() {
             Recruitment <span className="text-primary">Process</span>
           </h2>
           <p className="mt-4 text-secondary max-w-2xl mx-auto">
-            A streamlined, transparent approach from requirement to deployment
+            From requirement understanding and rigorous screening to documentation and final deployment—a systematic,
+            transparent path
           </p>
         </motion.div>
 

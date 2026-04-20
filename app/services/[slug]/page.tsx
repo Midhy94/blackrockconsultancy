@@ -47,7 +47,7 @@ export default function ServiceSlugPage({ params }: Props) {
               {other.map((s) => (
                 <li key={s.slug}>
                   <Link
-                    href={`/services/${s.slug}`}
+                    href={s.href}
                     className="inline-block px-4 py-2 rounded-lg bg-white border border-gray-200 text-sm font-medium text-secondary hover:border-primary/30 hover:text-primary transition-colors"
                   >
                     {s.title}

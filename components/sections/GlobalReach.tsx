@@ -13,13 +13,7 @@ const gccCountries = [
   { name: 'Bahrain', active: false },
 ]
 
-const europeCountries = [
-  'Germany',
-  'France',
-  'Italy',
-  'Spain',
-  'UK',
-]
+const europeCountries = ['UK', 'Germany', 'Portugal', 'Italy', 'France']
 
 interface GlobalReachProps {
   showBanner?: boolean

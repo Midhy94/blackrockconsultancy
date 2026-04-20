@@ -2,21 +2,94 @@
 
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { Factory, Building2, Utensils, Stethoscope, Truck, Shield, Cog, Store, HardHat, Cpu, Wheat, GraduationCap } from 'lucide-react'
+import {
+  Factory,
+  Building2,
+  HardHat,
+  Truck,
+  Cpu,
+  Cog,
+  Utensils,
+  Stethoscope,
+  Store,
+  Shield,
+  GraduationCap,
+  Wheat,
+} from 'lucide-react'
 
 const industries = [
-  { icon: Factory, name: 'Oil & Gas / Energy' },
-  { icon: Building2, name: 'Construction & Engineering' },
-  { icon: Utensils, name: 'Hospitality & Tourism' },
-  { icon: Stethoscope, name: 'Healthcare & Medical Services' },
-  { icon: Truck, name: 'Manufacturing & Logistics' },
-  { icon: Shield, name: 'Security & Facility Management' },
-  { icon: Cog, name: 'Fabrication and Machine Shops' },
-  { icon: Store, name: 'Retail & Customer Service' },
-  { icon: HardHat, name: 'Infrastructure Projects' },
-  { icon: Cpu, name: 'Information Technology' },
-  { icon: Wheat, name: 'Agriculture & Food Processing' },
-  { icon: GraduationCap, name: 'Education & Training' },
+  {
+    icon: Factory,
+    name: 'Oil & Gas and Energy',
+    description:
+      'Specialist recruitment for upstream, midstream, and downstream operations, providing technical experts for a demanding global energy sector.',
+  },
+  {
+    icon: Building2,
+    name: 'Construction & Engineering',
+    description:
+      'Connecting skilled engineers and on-site professionals with large-scale international building and design projects.',
+  },
+  {
+    icon: HardHat,
+    name: 'Infrastructure',
+    description:
+      'Sourcing experienced teams for the development of residential and commercial spaces, as well as transport networks like roads, railways, and bridges.',
+  },
+  {
+    icon: Truck,
+    name: 'Manufacturing & Logistics',
+    description:
+      'Providing manpower for production and supply chain management, from factory floor specialists to logistics coordinators.',
+  },
+  {
+    icon: Cpu,
+    name: 'Information Technology & Technical Services',
+    description:
+      'Sourcing specialized IT talent and technical support teams for the rapidly evolving digital landscape.',
+  },
+  {
+    icon: Cog,
+    name: 'Fabrication & Machine Shops',
+    description:
+      'Expert staffing for high-precision metalwork, welding, and industrial manufacturing environments.',
+  },
+  {
+    icon: Utensils,
+    name: 'Hospitality & Tourism',
+    description:
+      'Supplying talent for hotel, travel, and tourism sectors to ensure premium guest experiences.',
+  },
+  {
+    icon: Stethoscope,
+    name: 'Healthcare & Medical Services',
+    description:
+      'Connecting qualified medical professionals and support staff with international healthcare providers.',
+  },
+  {
+    icon: Store,
+    name: 'Retail & Customer Service',
+    description:
+      'Staffing retail environments with professionals focused on sales excellence and customer satisfaction.',
+  },
+  {
+    icon: Shield,
+    name: 'Security & Facility Management',
+    description:
+      'Providing trained personnel for safety, maintenance, and efficient operation of facilities.',
+  },
+  {
+    icon: GraduationCap,
+    name: 'Education & Training',
+    description:
+      'Recruiting educators and training specialists for institutional and professional development.',
+  },
+  {
+    icon: Wheat,
+    name: 'Agriculture & Food Processing',
+    description:
+      'Delivering manpower for farming and global food supply chains, from cultivation to processing.',
+  },
 ]
 
 interface IndustriesProps {
@@ -44,31 +117,34 @@ export default function Industries({ showBanner = true }: IndustriesProps) {
             <div className="absolute inset-0 bg-dark/60 flex items-center justify-center px-6">
               <div className="text-center text-white">
                 <h2 className="font-heading font-bold text-3xl sm:text-4xl">
-                  Industries We <span className="text-primary">Serve</span>
+                  Industries We <span className="text-primary">Focus On</span>
                 </h2>
-                <p className="mt-2 text-white/90 max-w-xl mx-auto">
-                  Expertise across diverse sectors for comprehensive staffing solutions
+                <p className="mt-2 text-white/90 max-w-2xl mx-auto text-sm sm:text-base">
+                  Focused expertise across the sectors where we recruit and deploy talent internationally
                 </p>
               </div>
             </div>
           </motion.div>
         )}
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {industries.map((industry, index) => (
             <motion.div
               key={industry.name}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.03 }}
+              transition={{ delay: index * 0.04 }}
               className="group"
             >
-              <div className="h-full p-4 rounded-xl bg-white border border-gray-100 hover:border-primary/30 hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center">
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-3 group-hover:bg-primary transition-colors">
+              <div className="h-full p-5 sm:p-6 rounded-2xl bg-white border border-gray-100 hover:border-primary/30 hover:shadow-lg transition-all duration-300 flex flex-col">
+                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary transition-colors shrink-0">
                   <industry.icon size={22} className="text-primary group-hover:text-white transition-colors" />
                 </div>
-                <span className="font-medium text-sm text-dark group-hover:text-primary transition-colors">{industry.name}</span>
+                <h3 className="font-heading font-semibold text-base text-dark group-hover:text-primary transition-colors mb-2">
+                  {industry.name}
+                </h3>
+                <p className="text-secondary text-sm leading-relaxed flex-1">{industry.description}</p>
               </div>
             </motion.div>
           ))}

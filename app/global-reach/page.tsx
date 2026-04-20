@@ -5,7 +5,8 @@ import CTASection from '@/components/sections/CTASection'
 
 export const metadata: Metadata = {
   title: 'Global Reach | BLACK ROCKS CONSULTANCY',
-  description: 'Connecting talent with opportunities across GCC (Saudi Arabia, UAE, Qatar, Oman, Kuwait, Bahrain) and Europe.',
+  description:
+    'Currently serving Saudi Arabia, with expansion across the GCC (UAE, Qatar, Oman, Kuwait, Bahrain) and key European markets including the UK, Germany, Portugal, Italy, and France.',
 }
 
 export default function GlobalReachPage() {

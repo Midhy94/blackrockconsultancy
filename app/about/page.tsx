@@ -6,7 +6,8 @@ import CTASection from '@/components/sections/CTASection'
 
 export const metadata: Metadata = {
   title: 'About Us | BLACK ROCKS CONSULTANCY',
-  description: 'BLACK ROCKS CONSULTANCY - A recruitment firm registered under MCA and approved by MEA, Government of India. Vision, mission, and core values.',
+  description:
+    'Professionally managed overseas manpower recruitment and HR support, registered under MCA and approved by MEA, Government of India. Vision, mission, and core values.',
 }
 
 export default function AboutPage() {
@@ -14,7 +15,7 @@ export default function AboutPage() {
     <>
       <PageHeader
         title="About Us"
-        subtitle="Your dependable partner for overseas recruitment"
+        subtitle="A vital link between talent and global industries, with a primary focus on the GCC and European regions"
         image="https://images.unsplash.com/photo-1552664730-d307ca884211?w=1920&q=80"
         imageAlt="Professional business meeting"
       />

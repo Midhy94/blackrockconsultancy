@@ -9,6 +9,7 @@ export type ServiceSlug =
 
 export interface ServiceDefinition {
   slug: ServiceSlug
+  href: `/services/${ServiceSlug}`
   title: string
   shortDescription: string
   icon: LucideIcon
@@ -21,16 +22,18 @@ export interface ServiceDefinition {
 export const servicesList: ServiceDefinition[] = [
   {
     slug: 'recruitment-skilled-semi-skilled',
-    title: 'Recruitment for skilled and semi-skilled roles',
-    shortDescription: 'Comprehensive talent sourcing and placement for various skill levels.',
+    href: '/services/recruitment-skilled-semi-skilled',
+    title: 'Overseas Manpower Recruitment',
+    shortDescription:
+      'Sourcing and placing skilled, semi-skilled, and professional workforces across diverse international industries.',
     icon: UserPlus,
     description:
-      'We identify, screen, and place candidates who match your technical and cultural requirements. Our process reduces time-to-hire while maintaining quality and compliance for overseas deployments.',
+      'We specialize in sourcing and placing skilled, semi-skilled, and professional workforces across diverse international industries. We provide tailored staffing solutions to meet the specific technical requirements of global organizations.',
     benefits: [
-      'Role-specific sourcing across GCC and European markets',
-      'Structured screening and shortlisting',
-      'Transparent communication with clients and candidates',
-      'Support aligned with your workforce plans',
+      'Tailored staffing for your technical requirements',
+      'Skilled, semi-skilled, and professional candidates',
+      'Coverage across diverse international industries',
+      'Solutions aligned to global organizational needs',
     ],
     processSteps: [
       { title: 'Requirement intake', detail: 'We capture role scope, skills, and compliance needs.' },
@@ -41,16 +44,18 @@ export const servicesList: ServiceDefinition[] = [
   },
   {
     slug: 'documentation-visa-support',
-    title: 'Documentation and visa support',
-    shortDescription: 'End-to-end assistance with paperwork and visa processing.',
+    href: '/services/documentation-visa-support',
+    title: 'Documentation & Visa Processing',
+    shortDescription:
+      'Legal formalities, biometrics, visa stamping, and ticket coordination with full regulatory compliance.',
     icon: FileCheck,
     description:
-      'Navigating work permits and documentation can be complex. We guide candidates and employers through the required paperwork with clear timelines and checklists.',
+      'Our team manages the complexities of legal formalities, ensuring candidates meet the physical and professional standards required by employers. We handle biometrics, visa stamping, and ticket coordination so that all placements strictly adhere to Indian and international labour laws.',
     benefits: [
-      'Checklist-driven document collection',
-      'Coordination with authorised processes where applicable',
-      'Reduced errors and resubmissions',
-      'Single point of contact for status updates',
+      'End-to-end management of legal formalities',
+      'Support for biometrics, visa stamping, and tickets',
+      'Standards aligned with employer requirements',
+      'Compliance with Indian and international labour laws',
     ],
     processSteps: [
       { title: 'Document audit', detail: 'Review required forms and supporting evidence.' },
@@ -61,42 +66,46 @@ export const servicesList: ServiceDefinition[] = [
   },
   {
     slug: 'pre-departure-orientation',
-    title: 'Pre-departure orientation',
-    shortDescription: 'Preparing candidates for their new roles and destinations.',
+    href: '/services/pre-departure-orientation',
+    title: 'Pre-Departure Orientation',
+    shortDescription:
+      'Pre-departure sessions on labor laws, workplace safety, culture, and essential travel-readiness guidance.',
     icon: Plane,
     description:
-      'Successful relocation starts before the flight. We prepare candidates on workplace expectations, culture, and practical matters so they arrive confident and ready.',
+      'Our Pre-Departure Orientation (PDO) helps candidates transition smoothly into overseas employment. Sessions cover destination-country labor laws, cultural norms, workplace safety, and practical travel readiness, including clear Dos and Don\'ts before deployment.',
     benefits: [
-      'Role and employer-specific briefing',
-      'Cultural and practical orientation',
-      'Q&A with experienced coordinators',
-      'Materials candidates can revisit',
+      'Clear guidance on destination labor laws and expectations',
+      'Cultural orientation for smoother workplace integration',
+      'Workplace safety awareness before departure',
+      'Practical Dos and Don\'ts to reduce deployment risk',
     ],
     processSteps: [
-      { title: 'Briefing schedule', detail: 'Align sessions with deployment dates.' },
-      { title: 'Content delivery', detail: 'Cover role, location, and compliance reminders.' },
-      { title: 'Q&A', detail: 'Address individual concerns before travel.' },
-      { title: 'Final checklist', detail: 'Travel documents, contacts, and arrival steps.' },
+      { title: 'PDO planning', detail: 'Schedule orientation aligned with deployment timelines.' },
+      { title: 'Core training', detail: 'Cover labor laws, cultural norms, and workplace safety requirements.' },
+      { title: 'Worker readiness', detail: 'Review role expectations and essential Dos and Don\'ts before travel.' },
+      { title: 'Final pre-departure check', detail: 'Confirm documents, contacts, and arrival instructions.' },
     ],
   },
   {
     slug: 'post-placement-assistance',
-    title: 'Post-placement assistance',
-    shortDescription: 'Ongoing support after deployment for smooth transition.',
+    href: '/services/post-placement-assistance',
+    title: 'Post-Placement Support',
+    shortDescription:
+      'Continuous communication and settlement assistance for long-term career success.',
     icon: Headphones,
     description:
-      'The first weeks in a new country matter. We stay available to help candidates and employers resolve early issues and keep engagement productive.',
+      'Our support continues after deployment. We provide full operational cooperation and act as a bridge between employer and employee to resolve early-stage challenges, onboarding concerns, or contractual queries during the placement period.',
     benefits: [
-      'Structured follow-up touchpoints',
-      'Escalation path for urgent issues',
-      'Feedback loop to improve future placements',
-      'Retention-focused communication',
+      'Continuous follow-up after the candidate reaches destination',
+      'Operational coordination between employer and employee',
+      'Faster resolution for onboarding and contractual concerns',
+      'A dependable support channel during initial deployment',
     ],
     processSteps: [
       { title: 'Arrival check-in', detail: 'Confirm safe arrival and initial settling.' },
-      { title: '30-day review', detail: 'Gather feedback from candidate and employer.' },
-      { title: 'Issue resolution', detail: 'Coordinate on workplace or logistics concerns.' },
-      { title: 'Ongoing support', detail: 'Defined channel for HR and candidate queries.' },
+      { title: 'Initial coordination', detail: 'Align candidate, employer, and operations contacts.' },
+      { title: 'Issue resolution', detail: 'Coordinate on workplace, accommodation, or contractual concerns.' },
+      { title: 'Ongoing support', detail: 'Maintain a defined channel for HR and candidate queries.' },
     ],
   },
 ]

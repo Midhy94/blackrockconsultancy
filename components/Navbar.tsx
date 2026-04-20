@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import Image from 'next/image'
 import { Menu, X, ChevronDown } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { servicesList } from '@/lib/services-data'
@@ -17,6 +16,9 @@ const mainNavItems = [
   { href: '/global-reach', label: 'Global Reach' },
   { href: '/contact', label: 'Contact' },
 ] as const
+
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH?.replace(/^\/+|\/+$/g, '') ?? ''
+const logoSrc = `/${[basePath, 'SBR-logo.png'].filter(Boolean).join('/')}`
 
 export default function Navbar() {
   const pathname = usePathname()
@@ -70,13 +72,12 @@ export default function Navbar() {
       <nav className="container-custom px-4 sm:px-6 lg:px-8 py-3">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center group">
-            <Image
-              src="/SBR-logo.png"
+            <img
+              src={logoSrc}
               alt="BLACK ROCKS CONSULTANCY"
               width={180}
               height={48}
               className="h-8 sm:h-9 w-auto object-contain"
-              priority
             />
           </Link>
 
@@ -136,7 +137,7 @@ export default function Navbar() {
                       {servicesList.map((s) => (
                         <Link
                           key={s.slug}
-                          href={`/services/${s.slug}`}
+                          href={s.href}
                           onClick={() => setDesktopServicesOpen(false)}
                           className="block px-4 py-2 text-sm text-secondary hover:bg-light hover:text-primary line-clamp-2"
                         >
@@ -245,7 +246,7 @@ export default function Navbar() {
                         {servicesList.map((s) => (
                           <Link
                             key={s.slug}
-                            href={`/services/${s.slug}`}
+                            href={s.href}
                             onClick={() => {
                               setIsMobileMenuOpen(false)
                               setMobileServicesOpen(false)
