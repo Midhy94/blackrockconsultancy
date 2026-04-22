@@ -1,4 +1,7 @@
+'use client'
+
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook } from 'lucide-react'
 
 const footerLinks = {
@@ -22,6 +25,10 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH?.replace(/^\/+|\/+$/g, '') ??
 const lightLogoSrc = `/${[basePath, 'SBR-logo-Light.png'].filter(Boolean).join('/')}`
 
 export default function Footer() {
+  const pathname = usePathname() ?? ''
+  const isActive = (href: string) =>
+    href === '/services' ? pathname === '/services' || pathname.startsWith('/services/') : pathname === href
+
   return (
     <footer className="bg-dark text-white">
       <div className="container-custom section-padding">
@@ -50,7 +57,9 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-gray-400 hover:text-primary transition-colors text-sm"
+                    className={`transition-colors text-sm ${
+                      isActive(link.href) ? 'text-primary font-semibold' : 'text-gray-400 hover:text-primary'
+                    }`}
                   >
                     {link.label}
                   </Link>

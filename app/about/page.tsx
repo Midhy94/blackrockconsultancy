@@ -16,7 +16,7 @@ export default function AboutPage() {
       <PageHeader
         title="About Us"
         subtitle="A vital link between talent and global industries, with a primary focus on the GCC and European regions"
-        image="https://images.unsplash.com/photo-1552664730-d307ca884211?w=1920&q=80"
+        image="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=2000"
         imageAlt="Professional business meeting"
       />
       <About />

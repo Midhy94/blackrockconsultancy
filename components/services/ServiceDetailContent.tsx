@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { CheckCircle2, ListOrdered } from 'lucide-react'
 import { getServiceBySlug, type ServiceSlug } from '@/lib/services-data'
@@ -12,25 +13,35 @@ export default function ServiceDetailContent({ slug }: { slug: ServiceSlug }) {
 
   if (!service) return null
 
-  const Icon = service.icon
-
   return (
     <>
       <section className="section-padding bg-white">
         <div className="container-custom">
-          <div className="max-w-3xl">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-6xl mx-auto">
             <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="flex items-start gap-4"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl"
             >
-              <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                <Icon size={28} className="text-primary" />
-              </div>
-              <div>
-                <h2 className="font-heading font-bold text-2xl text-dark sr-only">Overview</h2>
-                <p className="text-secondary leading-relaxed">{service.description}</p>
-              </div>
+                <Image
+                  src={service.introImage}
+                  alt={service.introImageAlt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  priority
+                />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="font-heading font-bold text-3xl sm:text-4xl text-dark">
+                Service <span className="text-primary">Overview</span>
+              </h2>
+              <p className="mt-6 text-secondary leading-relaxed">{service.description}</p>
             </motion.div>
           </div>
         </div>
@@ -75,7 +86,7 @@ export default function ServiceDetailContent({ slug }: { slug: ServiceSlug }) {
             <ListOrdered className="text-primary" size={28} />
             How we <span className="text-primary">work</span>
           </motion.h2>
-          <ol className="space-y-6">
+          <ol className="grid sm:grid-cols-2 gap-6">
             {service.processSteps.map((step, i) => (
               <motion.li
                 key={i}
@@ -83,14 +94,16 @@ export default function ServiceDetailContent({ slug }: { slug: ServiceSlug }) {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.06 }}
-                className="flex gap-4"
+                className="p-6 rounded-2xl border border-gray-100 bg-light/60 hover:border-primary/20 transition-colors"
               >
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary text-white font-heading font-bold text-sm">
-                  {i + 1}
-                </span>
-                <div>
+                <div className="flex items-start gap-4">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary text-white font-heading font-bold text-sm">
+                    {i + 1}
+                  </span>
+                  <div>
                   <h3 className="font-heading font-semibold text-dark">{step.title}</h3>
                   <p className="mt-1 text-secondary text-sm leading-relaxed">{step.detail}</p>
+                  </div>
                 </div>
               </motion.li>
             ))}

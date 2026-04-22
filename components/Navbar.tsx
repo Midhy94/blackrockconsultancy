@@ -21,7 +21,7 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH?.replace(/^\/+|\/+$/g, '') ??
 const logoSrc = `/${[basePath, 'SBR-logo.png'].filter(Boolean).join('/')}`
 
 export default function Navbar() {
-  const pathname = usePathname()
+  const pathname = usePathname() ?? ''
   const [isVisible, setIsVisible] = useState(true)
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -32,6 +32,7 @@ export default function Navbar() {
 
   const servicesActive =
     pathname === '/services' || pathname.startsWith('/services/')
+  const isActive = (href: string) => pathname === href
 
   useEffect(() => {
     const handleScroll = () => {
@@ -85,16 +86,20 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center gap-6 xl:gap-8">
             <Link
               href="/"
-              className={`font-medium transition-colors text-sm ${
-                pathname === '/' ? 'text-primary' : 'text-secondary hover:text-primary'
+              className={`font-medium transition-colors text-sm pb-1 border-b-2 ${
+                isActive('/')
+                  ? 'text-primary-dark border-primary'
+                  : 'text-secondary border-transparent hover:text-primary hover:border-primary/40'
               }`}
             >
               Home
             </Link>
             <Link
               href="/about"
-              className={`font-medium transition-colors text-sm ${
-                pathname === '/about' ? 'text-primary' : 'text-secondary hover:text-primary'
+              className={`font-medium transition-colors text-sm pb-1 border-b-2 ${
+                isActive('/about')
+                  ? 'text-primary-dark border-primary'
+                  : 'text-secondary border-transparent hover:text-primary hover:border-primary/40'
               }`}
             >
               About
@@ -104,8 +109,10 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={() => setDesktopServicesOpen((o) => !o)}
-                className={`inline-flex items-center gap-1 font-medium transition-colors text-sm ${
-                  servicesActive ? 'text-primary' : 'text-secondary hover:text-primary'
+                className={`inline-flex items-center gap-1 font-medium transition-colors text-sm pb-1 border-b-2 ${
+                  servicesActive
+                    ? 'text-primary-dark border-primary'
+                    : 'text-secondary border-transparent hover:text-primary hover:border-primary/40'
                 }`}
                 aria-expanded={desktopServicesOpen}
                 aria-haspopup="true"
@@ -129,7 +136,9 @@ export default function Navbar() {
                       <Link
                         href="/services"
                         onClick={() => setDesktopServicesOpen(false)}
-                        className="block px-4 py-2.5 text-sm font-semibold text-dark hover:bg-light hover:text-primary"
+                        className={`block px-4 py-2.5 text-sm font-semibold hover:bg-light ${
+                          isActive('/services') ? 'text-primary-dark bg-light' : 'text-dark hover:text-primary'
+                        }`}
                       >
                         All services
                       </Link>
@@ -139,7 +148,9 @@ export default function Navbar() {
                           key={s.slug}
                           href={s.href}
                           onClick={() => setDesktopServicesOpen(false)}
-                          className="block px-4 py-2 text-sm text-secondary hover:bg-light hover:text-primary line-clamp-2"
+                          className={`block px-4 py-2 text-sm hover:bg-light line-clamp-2 ${
+                            isActive(s.href) ? 'text-primary-dark bg-light font-medium' : 'text-secondary hover:text-primary'
+                          }`}
                         >
                           {s.title}
                         </Link>
@@ -154,8 +165,10 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`font-medium transition-colors text-sm ${
-                  pathname === link.href ? 'text-primary' : 'text-secondary hover:text-primary'
+                className={`font-medium transition-colors text-sm pb-1 border-b-2 ${
+                  isActive(link.href)
+                    ? 'text-primary-dark border-primary'
+                    : 'text-secondary border-transparent hover:text-primary hover:border-primary/40'
                 }`}
               >
                 {link.label}
@@ -191,8 +204,8 @@ export default function Navbar() {
                 <Link
                   href="/"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`font-medium py-2.5 ${
-                    pathname === '/' ? 'text-primary' : 'text-secondary hover:text-primary'
+                  className={`font-medium py-2.5 px-2 rounded-md transition-colors ${
+                    isActive('/') ? 'text-primary-dark bg-primary/10' : 'text-secondary hover:text-primary hover:bg-light'
                   }`}
                 >
                   Home
@@ -200,8 +213,8 @@ export default function Navbar() {
                 <Link
                   href="/about"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`font-medium py-2.5 ${
-                    pathname === '/about' ? 'text-primary' : 'text-secondary hover:text-primary'
+                  className={`font-medium py-2.5 px-2 rounded-md transition-colors ${
+                    isActive('/about') ? 'text-primary-dark bg-primary/10' : 'text-secondary hover:text-primary hover:bg-light'
                   }`}
                 >
                   About
@@ -211,8 +224,8 @@ export default function Navbar() {
                   <button
                     type="button"
                     onClick={() => setMobileServicesOpen((o) => !o)}
-                    className={`flex w-full items-center justify-between font-medium py-2.5 ${
-                      servicesActive ? 'text-primary' : 'text-secondary'
+                    className={`flex w-full items-center justify-between font-medium py-2.5 px-2 rounded-md transition-colors ${
+                      servicesActive ? 'text-primary-dark bg-primary/10' : 'text-secondary hover:text-primary hover:bg-light'
                     }`}
                     aria-expanded={mobileServicesOpen}
                   >
@@ -239,7 +252,9 @@ export default function Navbar() {
                             setIsMobileMenuOpen(false)
                             setMobileServicesOpen(false)
                           }}
-                          className="block py-2 text-sm font-semibold text-dark hover:text-primary"
+                          className={`block py-2 text-sm font-semibold ${
+                            isActive('/services') ? 'text-primary-dark' : 'text-dark hover:text-primary'
+                          }`}
                         >
                           All services
                         </Link>
@@ -251,7 +266,9 @@ export default function Navbar() {
                               setIsMobileMenuOpen(false)
                               setMobileServicesOpen(false)
                             }}
-                            className="block py-2 text-sm text-secondary hover:text-primary"
+                            className={`block py-2 text-sm ${
+                              isActive(s.href) ? 'text-primary-dark font-medium' : 'text-secondary hover:text-primary'
+                            }`}
                           >
                             {s.title}
                           </Link>
@@ -266,8 +283,10 @@ export default function Navbar() {
                     key={link.href}
                     href={link.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className={`font-medium py-2.5 ${
-                      pathname === link.href ? 'text-primary' : 'text-secondary hover:text-primary'
+                    className={`font-medium py-2.5 px-2 rounded-md transition-colors ${
+                      isActive(link.href)
+                        ? 'text-primary-dark bg-primary/10'
+                        : 'text-secondary hover:text-primary hover:bg-light'
                     }`}
                   >
                     {link.label}

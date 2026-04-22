@@ -2,7 +2,7 @@ import type { LucideIcon } from 'lucide-react'
 import { UserPlus, FileCheck, Plane, Headphones } from 'lucide-react'
 
 export type ServiceSlug =
-  | 'recruitment-skilled-semi-skilled'
+  | 'overseas-manpower-recruitment'
   | 'documentation-visa-support'
   | 'pre-departure-orientation'
   | 'post-placement-assistance'
@@ -13,6 +13,8 @@ export interface ServiceDefinition {
   title: string
   shortDescription: string
   icon: LucideIcon
+  introImage: string
+  introImageAlt: string
   /** Longer copy for landing page */
   description: string
   benefits: string[]
@@ -21,12 +23,14 @@ export interface ServiceDefinition {
 
 export const servicesList: ServiceDefinition[] = [
   {
-    slug: 'recruitment-skilled-semi-skilled',
-    href: '/services/recruitment-skilled-semi-skilled',
+    slug: 'overseas-manpower-recruitment',
+    href: '/services/overseas-manpower-recruitment',
     title: 'Overseas Manpower Recruitment',
     shortDescription:
       'Sourcing and placing skilled, semi-skilled, and professional workforces across diverse international industries.',
     icon: UserPlus,
+    introImage: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1600&q=80',
+    introImageAlt: 'Recruitment interview and candidate review session',
     description:
       'We specialize in sourcing and placing skilled, semi-skilled, and professional workforces across diverse international industries. We provide tailored staffing solutions to meet the specific technical requirements of global organizations.',
     benefits: [
@@ -49,6 +53,8 @@ export const servicesList: ServiceDefinition[] = [
     shortDescription:
       'Legal formalities, biometrics, visa stamping, and ticket coordination with full regulatory compliance.',
     icon: FileCheck,
+    introImage: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1600&q=80',
+    introImageAlt: 'Passport, visa forms, and travel documents on desk',
     description:
       'Our team manages the complexities of legal formalities, ensuring candidates meet the physical and professional standards required by employers. We handle biometrics, visa stamping, and ticket coordination so that all placements strictly adhere to Indian and international labour laws.',
     benefits: [
@@ -71,6 +77,8 @@ export const servicesList: ServiceDefinition[] = [
     shortDescription:
       'Pre-departure sessions on labor laws, workplace safety, culture, and essential travel-readiness guidance.',
     icon: Plane,
+    introImage: 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=1600&q=80',
+    introImageAlt: 'Air travel and orientation preparation before departure',
     description:
       'Our Pre-Departure Orientation (PDO) helps candidates transition smoothly into overseas employment. Sessions cover destination-country labor laws, cultural norms, workplace safety, and practical travel readiness, including clear Dos and Don\'ts before deployment.',
     benefits: [
@@ -93,6 +101,8 @@ export const servicesList: ServiceDefinition[] = [
     shortDescription:
       'Continuous communication and settlement assistance for long-term career success.',
     icon: Headphones,
+    introImage: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1600&q=80',
+    introImageAlt: 'Support team assisting deployed workforce remotely',
     description:
       'Our support continues after deployment. We provide full operational cooperation and act as a bridge between employer and employee to resolve early-stage challenges, onboarding concerns, or contractual queries during the placement period.',
     benefits: [

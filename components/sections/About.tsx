@@ -11,7 +11,7 @@ interface AboutProps {
 
 export default function About({
   showVisionMission = true,
-  imageSrc = 'https://images.unsplash.com/photo-1552664730-d307ca884211?w=800&q=80',
+  imageSrc = 'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1200',
 }: AboutProps) {
   return (
     <section id="about" className="section-padding bg-white">

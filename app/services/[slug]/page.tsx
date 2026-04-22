@@ -7,12 +7,22 @@ import ServiceDetailContent from '@/components/services/ServiceDetailContent'
 
 type Props = { params: { slug: string } }
 
+const legacySlugMap: Record<string, string> = {
+  'recruitment-skilled-semi-skilled': 'overseas-manpower-recruitment',
+}
+
+function resolveServiceSlug(slug: string): string {
+  return legacySlugMap[slug] ?? slug
+}
+
 export function generateStaticParams() {
-  return getAllServiceSlugs().map((slug) => ({ slug }))
+  const current = getAllServiceSlugs().map((slug) => ({ slug }))
+  const legacy = Object.keys(legacySlugMap).map((slug) => ({ slug }))
+  return [...current, ...legacy]
 }
 
 export function generateMetadata({ params }: Props): Metadata {
-  const service = getServiceBySlug(params.slug)
+  const service = getServiceBySlug(resolveServiceSlug(params.slug))
   if (!service) {
     return { title: 'Service | BLACK ROCKS CONSULTANCY' }
   }
@@ -23,7 +33,7 @@ export function generateMetadata({ params }: Props): Metadata {
 }
 
 export default function ServiceSlugPage({ params }: Props) {
-  const service = getServiceBySlug(params.slug)
+  const service = getServiceBySlug(resolveServiceSlug(params.slug))
   if (!service) notFound()
 
   const other = servicesList.filter((s) => s.slug !== service.slug)
