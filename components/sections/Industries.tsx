@@ -108,8 +108,8 @@ export default function Industries({ showBanner = true }: IndustriesProps) {
             className="relative rounded-2xl overflow-hidden h-48 sm:h-64 mb-16"
           >
             <Image
-              src="https://images.unsplash.com/photo-1581090464777-f3220bbe1b8e?w=1200&q=80"
-              alt="Global industrial landscape"
+              src="https://images.pexels.com/photos/257700/pexels-photo-257700.jpeg?auto=compress&cs=tinysrgb&w=1600"
+              alt="Industrial and logistics operations"
               fill
               className="object-cover"
               sizes="100vw"
@@ -117,10 +117,10 @@ export default function Industries({ showBanner = true }: IndustriesProps) {
             <div className="absolute inset-0 bg-dark/60 flex items-center justify-center px-6">
               <div className="text-center text-white">
                 <h2 className="font-heading font-bold text-3xl sm:text-4xl">
-                  Industries We <span className="text-primary">Focus On</span>
+                  Industries We <span className="text-primary">Serve</span>
                 </h2>
                 <p className="mt-2 text-white/90 max-w-2xl mx-auto text-sm sm:text-base">
-                  Focused expertise across the sectors where we recruit and deploy talent internationally
+                  Expertise across key sectors where we recruit and deploy talent internationally
                 </p>
               </div>
             </div>

@@ -56,8 +56,8 @@ export default function CandidateSupport() {
             className="relative aspect-[16/10] rounded-2xl overflow-hidden shadow-xl order-2"
           >
             <Image
-              src="https://images.unsplash.com/photo-1523240795612-9a1bba724e64?w=800&q=80"
-              alt="Diverse professionals working together"
+              src="https://images.pexels.com/photos/1181396/pexels-photo-1181396.jpeg?auto=compress&cs=tinysrgb&w=1200"
+              alt="Candidate onboarding and support session"
               fill
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 50vw"

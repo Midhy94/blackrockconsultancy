@@ -1,24 +1,29 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { Users, Mail } from 'lucide-react'
 
 export default function Hero() {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH?.replace(/^\/+|\/+$/g, '') ?? ''
+  const heroVideoSrc = `/${[basePath, 'hero-industries.mp4'].filter(Boolean).join('/')}`
+
   return (
-    <section id="home" className="relative min-h-[90vh] flex items-center overflow-hidden">
-      {/* Background Image */}
+    <section id="home" className="relative min-h-[70vh] sm:min-h-[75vh] flex items-center overflow-hidden">
+      {/* Background Media */}
       <div className="absolute inset-0">
         <div className="relative size-full">
-          <Image
-            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&q=80"
-            alt="Professional team collaboration"
-            fill
-            className="object-cover"
-            priority
-            sizes="100vw"
-          />
+          <video
+            className="absolute inset-0 h-full w-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&q=80"
+          >
+            <source src={heroVideoSrc} type="video/mp4" />
+          </video>
           <div className="absolute inset-0 bg-dark/70" />
         </div>
       </div>

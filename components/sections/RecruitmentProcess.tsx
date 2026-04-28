@@ -50,11 +50,9 @@ export default function RecruitmentProcess() {
           </p>
         </motion.div>
 
-        <div className="relative">
-          {/* Timeline line - hidden on mobile, visible on larger screens */}
-          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-gray-200 -translate-y-1/2" />
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8">
+        <div className="relative max-w-4xl mx-auto">
+          <div className="absolute left-5 top-2 bottom-2 w-0.5 bg-gradient-to-b from-primary/30 via-primary/20 to-transparent" />
+          <div className="space-y-5">
             {steps.map((step, index) => (
               <motion.div
                 key={step.title}
@@ -62,15 +60,20 @@ export default function RecruitmentProcess() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="relative"
+                className="relative pl-14"
               >
-                <div className="relative z-10 bg-white p-6 rounded-2xl border border-gray-100 hover:border-primary/20 hover:shadow-xl transition-all duration-300 group">
+                <div className="absolute left-0 top-5 z-10">
+                  <div className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-heading font-bold text-sm shadow-lg shadow-primary/25">
+                    {index + 1}
+                  </div>
+                </div>
+                <div className="relative bg-light p-5 sm:p-6 rounded-2xl border border-gray-100 hover:border-primary/25 hover:shadow-lg transition-all duration-300 group">
                   <div className="flex items-start gap-4">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary transition-colors">
-                      <step.icon size={24} className="text-primary group-hover:text-white transition-colors" />
+                    <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-white border border-primary/15 flex items-center justify-center group-hover:bg-primary transition-colors">
+                      <step.icon size={22} className="text-primary group-hover:text-white transition-colors" />
                     </div>
                     <div>
-                      <span className="text-xs font-semibold text-primary">Step {index + 1}</span>
+                      <p className="text-xs font-semibold tracking-wide uppercase text-primary">Process Step</p>
                       <h3 className="font-heading font-semibold text-lg text-dark mt-1">{step.title}</h3>
                       <p className="text-secondary text-sm mt-2 leading-relaxed">{step.description}</p>
                     </div>

@@ -12,9 +12,11 @@ const mainNavItems = [
   { href: '/about', label: 'About' },
   { href: '/industries', label: 'Industries' },
   { href: '/jobs', label: 'Careers' },
+  { href: '/contact', label: 'Contact' },
+] as const
+const moreNavItems = [
   { href: '/process', label: 'Recruitment Process' },
   { href: '/global-reach', label: 'Global Reach' },
-  { href: '/contact', label: 'Contact' },
 ] as const
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH?.replace(/^\/+|\/+$/g, '') ?? ''
@@ -22,17 +24,28 @@ const logoSrc = `/${[basePath, 'SBR-logo.png'].filter(Boolean).join('/')}`
 
 export default function Navbar() {
   const pathname = usePathname() ?? ''
+  const normalizePath = (value: string) => (value.length > 1 ? value.replace(/\/+$/, '') : value)
+  const stripBasePath = (value: string) => {
+    if (!basePath) return value
+    const prefix = `/${basePath}`
+    if (value === prefix) return '/'
+    return value.startsWith(`${prefix}/`) ? value.slice(prefix.length) : value
+  }
+  const currentPath = normalizePath(stripBasePath(pathname))
   const [isVisible, setIsVisible] = useState(true)
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false)
+  const [mobileMoreOpen, setMobileMoreOpen] = useState(false)
   const [desktopServicesOpen, setDesktopServicesOpen] = useState(false)
+  const [desktopMoreOpen, setDesktopMoreOpen] = useState(false)
   const lastScrollY = useRef(0)
   const desktopDropdownRef = useRef<HTMLDivElement>(null)
+  const desktopMoreDropdownRef = useRef<HTMLDivElement>(null)
 
-  const servicesActive =
-    pathname === '/services' || pathname.startsWith('/services/')
-  const isActive = (href: string) => pathname === href
+  const servicesActive = currentPath === '/services' || currentPath.startsWith('/services/')
+  const isActive = (href: string) => currentPath === normalizePath(stripBasePath(href))
+  const moreActive = moreNavItems.some((link) => isActive(link.href))
 
   useEffect(() => {
     const handleScroll = () => {
@@ -58,6 +71,12 @@ export default function Navbar() {
         !desktopDropdownRef.current.contains(e.target as Node)
       ) {
         setDesktopServicesOpen(false)
+      }
+      if (
+        desktopMoreDropdownRef.current &&
+        !desktopMoreDropdownRef.current.contains(e.target as Node)
+      ) {
+        setDesktopMoreOpen(false)
       }
     }
     document.addEventListener('mousedown', handleClickOutside)
@@ -88,8 +107,8 @@ export default function Navbar() {
               href="/"
               className={`font-medium transition-colors text-sm pb-1 border-b-2 ${
                 isActive('/')
-                  ? 'text-primary-dark border-primary'
-                  : 'text-secondary border-transparent hover:text-primary hover:border-primary/40'
+                  ? 'text-red-600 border-red-600'
+                  : 'text-secondary border-transparent hover:text-red-600 hover:border-red-300'
               }`}
             >
               Home
@@ -98,21 +117,21 @@ export default function Navbar() {
               href="/about"
               className={`font-medium transition-colors text-sm pb-1 border-b-2 ${
                 isActive('/about')
-                  ? 'text-primary-dark border-primary'
-                  : 'text-secondary border-transparent hover:text-primary hover:border-primary/40'
+                  ? 'text-red-600 border-red-600'
+                  : 'text-secondary border-transparent hover:text-red-600 hover:border-red-300'
               }`}
             >
               About
             </Link>
 
-            <div className="relative" ref={desktopDropdownRef}>
+            <div className="relative flex items-center" ref={desktopDropdownRef}>
               <button
                 type="button"
                 onClick={() => setDesktopServicesOpen((o) => !o)}
-                className={`inline-flex items-center gap-1 font-medium transition-colors text-sm pb-1 border-b-2 ${
+                className={`inline-flex items-center gap-1 font-medium transition-colors text-sm leading-none pb-1 border-b-2 ${
                   servicesActive
-                    ? 'text-primary-dark border-primary'
-                    : 'text-secondary border-transparent hover:text-primary hover:border-primary/40'
+                    ? 'text-red-600 border-red-600'
+                    : 'text-secondary border-transparent hover:text-red-600 hover:border-red-300'
                 }`}
                 aria-expanded={desktopServicesOpen}
                 aria-haspopup="true"
@@ -137,7 +156,7 @@ export default function Navbar() {
                         href="/services"
                         onClick={() => setDesktopServicesOpen(false)}
                         className={`block px-4 py-2.5 text-sm font-semibold hover:bg-light ${
-                          isActive('/services') ? 'text-primary-dark bg-light' : 'text-dark hover:text-primary'
+                          isActive('/services') ? 'text-red-600 bg-light' : 'text-dark hover:text-red-600'
                         }`}
                       >
                         All services
@@ -149,7 +168,7 @@ export default function Navbar() {
                           href={s.href}
                           onClick={() => setDesktopServicesOpen(false)}
                           className={`block px-4 py-2 text-sm hover:bg-light line-clamp-2 ${
-                            isActive(s.href) ? 'text-primary-dark bg-light font-medium' : 'text-secondary hover:text-primary'
+                            isActive(s.href) ? 'text-red-600 bg-light font-medium' : 'text-secondary hover:text-red-600'
                           }`}
                         >
                           {s.title}
@@ -161,14 +180,74 @@ export default function Navbar() {
               </AnimatePresence>
             </div>
 
-            {mainNavItems.slice(2).map((link) => (
+            {mainNavItems.slice(2, 4).map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 className={`font-medium transition-colors text-sm pb-1 border-b-2 ${
                   isActive(link.href)
-                    ? 'text-primary-dark border-primary'
-                    : 'text-secondary border-transparent hover:text-primary hover:border-primary/40'
+                    ? 'text-red-600 border-red-600'
+                    : 'text-secondary border-transparent hover:text-red-600 hover:border-red-300'
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+
+            <div className="relative flex items-center" ref={desktopMoreDropdownRef}>
+              <button
+                type="button"
+                onClick={() => setDesktopMoreOpen((o) => !o)}
+                className={`inline-flex items-center gap-1 font-medium transition-colors text-sm pb-1 border-b-2 ${
+                  moreActive
+                    ? 'text-red-600 border-red-600'
+                    : 'text-secondary border-transparent hover:text-red-600 hover:border-red-300'
+                }`}
+                aria-expanded={desktopMoreOpen}
+                aria-haspopup="true"
+              >
+                More
+                <ChevronDown
+                  size={16}
+                  className={`transition-transform ${desktopMoreOpen ? 'rotate-180' : ''}`}
+                />
+              </button>
+              <AnimatePresence>
+                {desktopMoreOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute left-0 top-full pt-2 z-50"
+                  >
+                    <div className="min-w-[220px] rounded-xl border border-gray-100 bg-white py-2 shadow-xl">
+                      {moreNavItems.map((link) => (
+                        <Link
+                          key={link.href}
+                          href={link.href}
+                          onClick={() => setDesktopMoreOpen(false)}
+                          className={`block px-4 py-2 text-sm hover:bg-light ${
+                            isActive(link.href) ? 'text-red-600 bg-light font-medium' : 'text-secondary hover:text-red-600'
+                          }`}
+                        >
+                          {link.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {mainNavItems.slice(4).map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`font-medium transition-colors text-sm pb-1 border-b-2 ${
+                  isActive(link.href)
+                    ? 'text-red-600 border-red-600'
+                    : 'text-secondary border-transparent hover:text-red-600 hover:border-red-300'
                 }`}
               >
                 {link.label}
@@ -205,7 +284,7 @@ export default function Navbar() {
                   href="/"
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={`font-medium py-2.5 px-2 rounded-md transition-colors ${
-                    isActive('/') ? 'text-primary-dark bg-primary/10' : 'text-secondary hover:text-primary hover:bg-light'
+                    isActive('/') ? 'text-red-600 bg-red-50' : 'text-secondary hover:text-red-600 hover:bg-light'
                   }`}
                 >
                   Home
@@ -214,7 +293,7 @@ export default function Navbar() {
                   href="/about"
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={`font-medium py-2.5 px-2 rounded-md transition-colors ${
-                    isActive('/about') ? 'text-primary-dark bg-primary/10' : 'text-secondary hover:text-primary hover:bg-light'
+                    isActive('/about') ? 'text-red-600 bg-red-50' : 'text-secondary hover:text-red-600 hover:bg-light'
                   }`}
                 >
                   About
@@ -225,7 +304,7 @@ export default function Navbar() {
                     type="button"
                     onClick={() => setMobileServicesOpen((o) => !o)}
                     className={`flex w-full items-center justify-between font-medium py-2.5 px-2 rounded-md transition-colors ${
-                      servicesActive ? 'text-primary-dark bg-primary/10' : 'text-secondary hover:text-primary hover:bg-light'
+                      servicesActive ? 'text-red-600 bg-red-50' : 'text-secondary hover:text-red-600 hover:bg-light'
                     }`}
                     aria-expanded={mobileServicesOpen}
                   >
@@ -253,7 +332,7 @@ export default function Navbar() {
                             setMobileServicesOpen(false)
                           }}
                           className={`block py-2 text-sm font-semibold ${
-                            isActive('/services') ? 'text-primary-dark' : 'text-dark hover:text-primary'
+                            isActive('/services') ? 'text-red-600' : 'text-dark hover:text-red-600'
                           }`}
                         >
                           All services
@@ -267,7 +346,7 @@ export default function Navbar() {
                               setMobileServicesOpen(false)
                             }}
                             className={`block py-2 text-sm ${
-                              isActive(s.href) ? 'text-primary-dark font-medium' : 'text-secondary hover:text-primary'
+                              isActive(s.href) ? 'text-red-600 font-medium' : 'text-secondary hover:text-red-600'
                             }`}
                           >
                             {s.title}
@@ -278,15 +357,76 @@ export default function Navbar() {
                   </AnimatePresence>
                 </div>
 
-                {mainNavItems.slice(2).map((link) => (
+                {mainNavItems.slice(2, 4).map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={`font-medium py-2.5 px-2 rounded-md transition-colors ${
                       isActive(link.href)
-                        ? 'text-primary-dark bg-primary/10'
-                        : 'text-secondary hover:text-primary hover:bg-light'
+                        ? 'text-red-600 bg-red-50'
+                        : 'text-secondary hover:text-red-600 hover:bg-light'
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+
+                <div className="border-t border-gray-100 my-2 pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setMobileMoreOpen((o) => !o)}
+                    className={`flex w-full items-center justify-between font-medium py-2.5 px-2 rounded-md transition-colors ${
+                      moreActive ? 'text-red-600 bg-red-50' : 'text-secondary hover:text-red-600 hover:bg-light'
+                    }`}
+                    aria-expanded={mobileMoreOpen}
+                  >
+                    More
+                    <ChevronDown
+                      size={18}
+                      className={`transition-transform duration-200 ${
+                        mobileMoreOpen ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </button>
+                  <AnimatePresence initial={false}>
+                    {mobileMoreOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.25 }}
+                        className="overflow-hidden pl-3 border-l-2 border-primary/20 ml-1"
+                      >
+                        {moreNavItems.map((link) => (
+                          <Link
+                            key={link.href}
+                            href={link.href}
+                            onClick={() => {
+                              setIsMobileMenuOpen(false)
+                              setMobileMoreOpen(false)
+                            }}
+                            className={`block py-2 text-sm ${
+                              isActive(link.href) ? 'text-red-600 font-medium' : 'text-secondary hover:text-red-600'
+                            }`}
+                          >
+                            {link.label}
+                          </Link>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
+                {mainNavItems.slice(4).map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`font-medium py-2.5 px-2 rounded-md transition-colors ${
+                      isActive(link.href)
+                        ? 'text-red-600 bg-red-50'
+                        : 'text-secondary hover:text-red-600 hover:bg-light'
                     }`}
                   >
                     {link.label}

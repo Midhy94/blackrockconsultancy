@@ -13,10 +13,10 @@ export default function IndustriesPage() {
   return (
     <>
       <PageHeader
-        title="Industries We Focus On"
-        subtitle="Focused expertise across the sectors where we recruit and deploy talent internationally"
-        image="https://images.unsplash.com/photo-1504307651254-35680f356041?w=1920&q=80"
-        imageAlt="Diverse industries"
+        title="Industries We Serve"
+        subtitle="Expertise across key sectors where we recruit and deploy talent internationally"
+        image="https://images.pexels.com/photos/175039/pexels-photo-175039.jpeg?auto=compress&cs=tinysrgb&w=2000"
+        imageAlt="Industrial facility and infrastructure background"
       />
       <Industries showBanner={false} />
       <CTASection />

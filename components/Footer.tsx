@@ -26,8 +26,18 @@ const lightLogoSrc = `/${[basePath, 'SBR-logo-Light.png'].filter(Boolean).join('
 
 export default function Footer() {
   const pathname = usePathname() ?? ''
+  const normalizePath = (value: string) => (value.length > 1 ? value.replace(/\/+$/, '') : value)
+  const stripBasePath = (value: string) => {
+    if (!basePath) return value
+    const prefix = `/${basePath}`
+    if (value === prefix) return '/'
+    return value.startsWith(`${prefix}/`) ? value.slice(prefix.length) : value
+  }
+  const currentPath = normalizePath(stripBasePath(pathname))
   const isActive = (href: string) =>
-    href === '/services' ? pathname === '/services' || pathname.startsWith('/services/') : pathname === href
+    normalizePath(stripBasePath(href)) === '/services'
+      ? currentPath === '/services' || currentPath.startsWith('/services/')
+      : currentPath === normalizePath(stripBasePath(href))
 
   return (
     <footer className="bg-dark text-white">
@@ -58,7 +68,7 @@ export default function Footer() {
                   <Link
                     href={link.href}
                     className={`transition-colors text-sm ${
-                      isActive(link.href) ? 'text-primary font-semibold' : 'text-gray-400 hover:text-primary'
+                      isActive(link.href) ? 'text-red-500 font-semibold' : 'text-gray-400 hover:text-red-500'
                     }`}
                   >
                     {link.label}

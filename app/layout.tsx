@@ -19,11 +19,19 @@ const poppins = Poppins({
   display: 'swap',
 })
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH?.replace(/^\/+|\/+$/g, '') ?? ''
+const faviconPath = `/${[basePath, 'favicon.png'].filter(Boolean).join('/')}`
+
 export const metadata: Metadata = {
   title: 'BLACK ROCKS CONSULTANCY | Connecting Skills with Global Opportunities',
   description:
     'Professionally managed overseas manpower recruitment and HR support—registered under MCA and approved by MEA, Government of India—connecting talent with the GCC and Europe.',
   keywords: 'recruitment, manpower, HR support, overseas jobs, GCC, Europe, staffing',
+  icons: {
+    icon: faviconPath,
+    shortcut: faviconPath,
+    apple: faviconPath,
+  },
   openGraph: {
     title: 'BLACK ROCKS CONSULTANCY | Connecting Skills with Global Opportunities',
     description:
