@@ -37,7 +37,10 @@ export default function LeadFormModal() {
   const [iName, setIName] = useState('')
   const [iEmail, setIEmail] = useState('')
   const [phone, setPhone] = useState('')
-  const [jobRole, setJobRole] = useState('')
+  const [dob, setDob] = useState('')
+  const [positionAppliedFor, setPositionAppliedFor] = useState('')
+  const [currentLocation, setCurrentLocation] = useState('')
+  const [keySkills, setKeySkills] = useState('')
   const [resume, setResume] = useState<File | null>(null)
 
   useEffect(() => {
@@ -47,7 +50,7 @@ export default function LeadFormModal() {
   useEffect(() => {
     if (state.isOpen) {
       setLeadType(state.leadType)
-      setJobRole(state.jobTitle)
+      setPositionAppliedFor(state.jobTitle)
       setErrors({})
       document.body.style.overflow = 'hidden'
     } else {
@@ -80,7 +83,9 @@ export default function LeadFormModal() {
       if (!iEmail.trim()) next.iEmail = 'Required'
       else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(iEmail)) next.iEmail = 'Invalid email'
       if (!phone.trim()) next.phone = 'Required'
-      if (!jobRole.trim()) next.jobRole = 'Required'
+      if (!dob.trim()) next.dob = 'Required'
+      if (!positionAppliedFor.trim()) next.positionAppliedFor = 'Required'
+      if (!currentLocation.trim()) next.currentLocation = 'Required'
       if (!resume) next.resume = 'Required'
     }
     setErrors(next)
@@ -110,7 +115,10 @@ export default function LeadFormModal() {
           name: iName,
           email: iEmail,
           phone,
-          jobRole,
+          dob,
+          positionAppliedFor,
+          currentLocation,
+          keySkills,
         },
         resumeFileName: resume?.name,
       })
@@ -284,13 +292,39 @@ export default function LeadFormModal() {
                       error={errors.phone}
                     />
                     <Field
-                      label="Job role / applied position"
-                      value={jobRole}
-                      onChange={setJobRole}
-                      error={errors.jobRole}
+                      label="Date of Birth (DOB)"
+                      type="date"
+                      value={dob}
+                      onChange={setDob}
+                      error={errors.dob}
+                    />
+                    <Field
+                      label="Position Applied For"
+                      value={positionAppliedFor}
+                      onChange={setPositionAppliedFor}
+                      error={errors.positionAppliedFor}
+                    />
+                    <Field
+                      label="Current Location (City)"
+                      value={currentLocation}
+                      onChange={setCurrentLocation}
+                      error={errors.currentLocation}
                     />
                     <div>
-                      <label className="block text-sm font-medium text-dark mb-1">Resume</label>
+                      <label className="block text-sm font-medium text-dark mb-1">
+                        Key Skills (Optional)
+                      </label>
+                      <textarea
+                        value={keySkills}
+                        onChange={(e) => setKeySkills(e.target.value)}
+                        rows={3}
+                        className="w-full rounded-lg border border-gray-200 px-3 py-2.5 text-sm text-dark placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-dark mb-1">
+                        CV Upload (Mandatory)
+                      </label>
                       <input
                         type="file"
                         accept=".pdf,.doc,.docx"

@@ -18,6 +18,10 @@ const moreNavItems = [
   { href: '/process', label: 'Recruitment Process' },
   { href: '/global-reach', label: 'Global Reach' },
 ] as const
+const careerNavItems = [
+  { href: '/jobs#job-openings', label: 'Jobs Opening' },
+  { href: '/jobs#apply-job', label: 'Apply Job' },
+] as const
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH?.replace(/^\/+|\/+$/g, '') ?? ''
 const logoSrc = `/${[basePath, 'SBR-logo.png'].filter(Boolean).join('/')}`
@@ -36,14 +40,18 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false)
+  const [mobileCareerOpen, setMobileCareerOpen] = useState(false)
   const [mobileMoreOpen, setMobileMoreOpen] = useState(false)
   const [desktopServicesOpen, setDesktopServicesOpen] = useState(false)
+  const [desktopCareerOpen, setDesktopCareerOpen] = useState(false)
   const [desktopMoreOpen, setDesktopMoreOpen] = useState(false)
   const lastScrollY = useRef(0)
   const desktopDropdownRef = useRef<HTMLDivElement>(null)
+  const desktopCareerDropdownRef = useRef<HTMLDivElement>(null)
   const desktopMoreDropdownRef = useRef<HTMLDivElement>(null)
 
   const servicesActive = currentPath === '/services' || currentPath.startsWith('/services/')
+  const careersActive = currentPath === '/jobs'
   const isActive = (href: string) => currentPath === normalizePath(stripBasePath(href))
   const moreActive = moreNavItems.some((link) => isActive(link.href))
 
@@ -71,6 +79,12 @@ export default function Navbar() {
         !desktopDropdownRef.current.contains(e.target as Node)
       ) {
         setDesktopServicesOpen(false)
+      }
+      if (
+        desktopCareerDropdownRef.current &&
+        !desktopCareerDropdownRef.current.contains(e.target as Node)
+      ) {
+        setDesktopCareerOpen(false)
       }
       if (
         desktopMoreDropdownRef.current &&
@@ -180,19 +194,60 @@ export default function Navbar() {
               </AnimatePresence>
             </div>
 
-            {mainNavItems.slice(2, 4).map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`font-medium transition-colors text-sm pb-1 border-b-2 ${
-                  isActive(link.href)
+            <Link
+              href="/industries"
+              className={`font-medium transition-colors text-sm pb-1 border-b-2 ${
+                isActive('/industries')
+                  ? 'text-red-600 border-red-600'
+                  : 'text-secondary border-transparent hover:text-red-600 hover:border-red-300'
+              }`}
+            >
+              Industries
+            </Link>
+
+            <div className="relative flex items-center" ref={desktopCareerDropdownRef}>
+              <button
+                type="button"
+                onClick={() => setDesktopCareerOpen((o) => !o)}
+                className={`inline-flex items-center gap-1 font-medium transition-colors text-sm pb-1 border-b-2 ${
+                  careersActive
                     ? 'text-red-600 border-red-600'
                     : 'text-secondary border-transparent hover:text-red-600 hover:border-red-300'
                 }`}
+                aria-expanded={desktopCareerOpen}
+                aria-haspopup="true"
               >
-                {link.label}
-              </Link>
-            ))}
+                Careers
+                <ChevronDown
+                  size={16}
+                  className={`transition-transform ${desktopCareerOpen ? 'rotate-180' : ''}`}
+                />
+              </button>
+              <AnimatePresence>
+                {desktopCareerOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute left-0 top-full pt-2 z-50"
+                  >
+                    <div className="min-w-[220px] rounded-xl border border-gray-100 bg-white py-2 shadow-xl">
+                      {careerNavItems.map((link) => (
+                        <Link
+                          key={link.href}
+                          href={link.href}
+                          onClick={() => setDesktopCareerOpen(false)}
+                          className="block px-4 py-2 text-sm text-secondary hover:bg-light hover:text-red-600"
+                        >
+                          {link.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
 
             <div className="relative flex items-center" ref={desktopMoreDropdownRef}>
               <button
@@ -357,20 +412,61 @@ export default function Navbar() {
                   </AnimatePresence>
                 </div>
 
-                {mainNavItems.slice(2, 4).map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className={`font-medium py-2.5 px-2 rounded-md transition-colors ${
-                      isActive(link.href)
-                        ? 'text-red-600 bg-red-50'
-                        : 'text-secondary hover:text-red-600 hover:bg-light'
+                <Link
+                  href="/industries"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`font-medium py-2.5 px-2 rounded-md transition-colors ${
+                    isActive('/industries')
+                      ? 'text-red-600 bg-red-50'
+                      : 'text-secondary hover:text-red-600 hover:bg-light'
+                  }`}
+                >
+                  Industries
+                </Link>
+
+                <div className="border-t border-gray-100 my-2 pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setMobileCareerOpen((o) => !o)}
+                    className={`flex w-full items-center justify-between font-medium py-2.5 px-2 rounded-md transition-colors ${
+                      careersActive ? 'text-red-600 bg-red-50' : 'text-secondary hover:text-red-600 hover:bg-light'
                     }`}
+                    aria-expanded={mobileCareerOpen}
                   >
-                    {link.label}
-                  </Link>
-                ))}
+                    Careers
+                    <ChevronDown
+                      size={18}
+                      className={`transition-transform duration-200 ${
+                        mobileCareerOpen ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </button>
+                  <AnimatePresence initial={false}>
+                    {mobileCareerOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.25 }}
+                        className="overflow-hidden pl-3 border-l-2 border-primary/20 ml-1"
+                      >
+                        {careerNavItems.map((link) => (
+                          <Link
+                            key={link.href}
+                            href={link.href}
+                            onClick={() => {
+                              setIsMobileMenuOpen(false)
+                              setMobileCareerOpen(false)
+                            }}
+                            className="block py-2 text-sm text-secondary hover:text-red-600"
+                          >
+                            {link.label}
+                          </Link>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
 
                 <div className="border-t border-gray-100 my-2 pt-2">
                   <button

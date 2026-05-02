@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import PageHeader from '@/components/PageHeader'
 import { jobListings } from '@/lib/jobs-data'
 import JobListClient from '@/components/jobs/JobListClient'
+import CareerApplicationForm from '@/components/jobs/CareerApplicationForm'
 import CTASection from '@/components/sections/CTASection'
 
 export const metadata: Metadata = {
@@ -21,6 +22,20 @@ export default function JobsPage() {
       />
       <section className="section-padding bg-white">
         <div className="container-custom">
+          <div className="mb-8 flex flex-wrap gap-3">
+            <a
+              href="#job-openings"
+              className="inline-flex items-center rounded-lg border border-gray-200 px-5 py-2.5 text-sm font-semibold text-dark hover:border-primary/30 hover:text-primary transition-colors"
+            >
+              Jobs Opening
+            </a>
+            <a
+              href="#apply-job"
+              className="inline-flex items-center rounded-lg border border-gray-200 px-5 py-2.5 text-sm font-semibold text-dark hover:border-primary/30 hover:text-primary transition-colors"
+            >
+              Apply Job
+            </a>
+          </div>
           <div className="max-w-3xl mb-12">
             <h2 className="font-heading font-bold text-2xl sm:text-3xl text-dark">
               Jobs <span className="text-primary">Available</span>
@@ -29,7 +44,12 @@ export default function JobsPage() {
               Current openings are listed below. Select &ldquo;Apply now&rdquo; to submit your details and resume through our candidate form.
             </p>
           </div>
-          <JobListClient jobs={jobListings} />
+          <div id="job-openings">
+            <JobListClient jobs={jobListings} />
+          </div>
+          <div className="mt-14">
+            <CareerApplicationForm />
+          </div>
         </div>
       </section>
       <CTASection />

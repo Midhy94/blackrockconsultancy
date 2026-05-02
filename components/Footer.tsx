@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook } from 'lucide-react'
+import { middleEastContact, middleEastTelHref } from '@/lib/contact'
 
 const footerLinks = {
   company: [
@@ -89,6 +90,19 @@ export default function Footer() {
               <li className="flex items-center gap-3">
                 <Phone size={18} className="flex-shrink-0 text-primary" />
                 <a href="tel:+917304424022" className="hover:text-primary transition-colors">+91 73044 24022</a>
+              </li>
+              <li className="flex items-start gap-3">
+                <MapPin size={18} className="flex-shrink-0 mt-0.5 text-primary" />
+                <span>UAE (Ajman): G1, Alshamsi Building, Behind Kualty Hospital, Abubakar Al Siddiqui Street</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <Phone size={18} className="flex-shrink-0 mt-0.5 text-primary" />
+                <span>
+                  {middleEastContact.name} — {middleEastContact.title}:{' '}
+                  <a href={middleEastTelHref()} className="hover:text-primary transition-colors">
+                    {middleEastContact.phoneDisplay}
+                  </a>
+                </span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail size={18} className="flex-shrink-0 text-primary" />

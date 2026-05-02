@@ -3,7 +3,6 @@ import PageHeader from '@/components/PageHeader'
 import Services from '@/components/sections/Services'
 import ClientBenefits from '@/components/sections/ClientBenefits'
 import CandidateSupport from '@/components/sections/CandidateSupport'
-import ServicesFAQ from '@/components/sections/ServicesFAQ'
 import CTASection from '@/components/sections/CTASection'
 
 export const metadata: Metadata = {
@@ -24,7 +23,6 @@ export default function ServicesPage() {
       <Services showBanner={false} />
       <ClientBenefits />
       <CandidateSupport />
-      <ServicesFAQ />
       <CTASection />
     </>
   )

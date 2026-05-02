@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { CheckCircle2, ListOrdered } from 'lucide-react'
+import { CheckCircle2, ChevronDown, ListOrdered } from 'lucide-react'
 import { getServiceBySlug, type ServiceSlug } from '@/lib/services-data'
 import { useLeadModal } from '@/contexts/LeadModalContext'
 
@@ -108,6 +108,41 @@ export default function ServiceDetailContent({ slug }: { slug: ServiceSlug }) {
               </motion.li>
             ))}
           </ol>
+        </div>
+      </section>
+
+      <section className="section-padding bg-light">
+        <div className="container-custom max-w-3xl">
+          <motion.h2
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="font-heading font-bold text-2xl sm:text-3xl text-dark mb-8 text-center"
+          >
+            Frequently Asked <span className="text-primary">Questions</span>
+          </motion.h2>
+          <div className="space-y-3">
+            {service.faqItems.map((item) => (
+              <details
+                key={item.question}
+                className="group rounded-2xl border border-gray-100 bg-white hover:border-primary/15 transition-colors"
+              >
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-4 sm:p-5 text-left font-medium text-dark [&::-webkit-details-marker]:hidden">
+                  <span className="pr-2">{item.question}</span>
+                  <ChevronDown
+                    size={20}
+                    className="shrink-0 text-primary transition-transform duration-200 group-open:rotate-180"
+                    aria-hidden
+                  />
+                </summary>
+                <div className="px-4 pb-4 sm:px-5 sm:pb-5 -mt-1">
+                  <p className="text-secondary text-sm sm:text-base leading-relaxed border-t border-gray-100 pt-4">
+                    {item.answer}
+                  </p>
+                </div>
+              </details>
+            ))}
+          </div>
         </div>
       </section>
 

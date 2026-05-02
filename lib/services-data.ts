@@ -19,6 +19,7 @@ export interface ServiceDefinition {
   description: string
   benefits: string[]
   processSteps: { title: string; detail: string }[]
+  faqItems: { question: string; answer: string }[]
 }
 
 export const servicesList: ServiceDefinition[] = [
@@ -45,6 +46,18 @@ export const servicesList: ServiceDefinition[] = [
       { title: 'Shortlist & coordination', detail: 'You review finalists; we coordinate interviews and offers.' },
       { title: 'Offer & mobilisation', detail: 'Documentation handoff and pre-deployment readiness.' },
     ],
+    faqItems: [
+      {
+        question: 'What industries do you recruit for overseas roles?',
+        answer:
+          'We recruit across engineering, construction, healthcare, hospitality, and other demand-based sectors for GCC and international employers.',
+      },
+      {
+        question: 'How do you ensure candidate quality?',
+        answer:
+          'Every profile goes through screening, qualification checks, and role-fit validation before being shared with employers.',
+      },
+    ],
   },
   {
     slug: 'documentation-visa-support',
@@ -68,6 +81,18 @@ export const servicesList: ServiceDefinition[] = [
       { title: 'Preparation', detail: 'Complete applications per destination requirements.' },
       { title: 'Submission support', detail: 'Track submissions and respond to queries.' },
       { title: 'Clearance & handover', detail: 'Confirm approvals and next steps for travel.' },
+    ],
+    faqItems: [
+      {
+        question: 'Do you manage complete visa documentation?',
+        answer:
+          'Yes, we support end-to-end documentation and visa processing workflows as per destination and employer requirements.',
+      },
+      {
+        question: 'What documents are typically required?',
+        answer:
+          'Common requirements include passport copies, qualifications, medical reports, and attestations, depending on destination-country rules.',
+      },
     ],
   },
   {
@@ -93,6 +118,18 @@ export const servicesList: ServiceDefinition[] = [
       { title: 'Worker readiness', detail: 'Review role expectations and essential Dos and Don\'ts before travel.' },
       { title: 'Final pre-departure check', detail: 'Confirm documents, contacts, and arrival instructions.' },
     ],
+    faqItems: [
+      {
+        question: 'What is covered in the pre-departure session?',
+        answer:
+          'The session covers local labor rules, cultural orientation, workplace expectations, and travel-readiness guidance.',
+      },
+      {
+        question: 'Is orientation mandatory before deployment?',
+        answer:
+          'Yes, orientation is strongly recommended to reduce onboarding risk and ensure smoother transition at destination.',
+      },
+    ],
   },
   {
     slug: 'post-placement-assistance',
@@ -116,6 +153,18 @@ export const servicesList: ServiceDefinition[] = [
       { title: 'Initial coordination', detail: 'Align candidate, employer, and operations contacts.' },
       { title: 'Issue resolution', detail: 'Coordinate on workplace, accommodation, or contractual concerns.' },
       { title: 'Ongoing support', detail: 'Maintain a defined channel for HR and candidate queries.' },
+    ],
+    faqItems: [
+      {
+        question: 'What support is available after deployment?',
+        answer:
+          'We continue to coordinate between candidate and employer for onboarding, communication, and early-stage issue handling.',
+      },
+      {
+        question: 'How are post-placement concerns handled?',
+        answer:
+          'Our operations team tracks concerns, aligns stakeholders, and supports timely resolution within agreed communication channels.',
+      },
     ],
   },
 ]

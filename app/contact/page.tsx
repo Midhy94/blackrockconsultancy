@@ -4,7 +4,8 @@ import Contact from '@/components/sections/Contact'
 
 export const metadata: Metadata = {
   title: 'Contact Us | BLACK ROCKS CONSULTANCY',
-  description: 'Get in touch with BLACK ROCKS CONSULTANCY. Mumbai office, phone, email, WhatsApp. Hire talent for GCC and Europe.',
+  description:
+    'Get in touch with BLACK ROCKS CONSULTANCY. Mumbai office, Middle East contact (James +966 53 448 0049), phone, email, WhatsApp. Hire talent for GCC and Europe.',
 }
 
 export default function ContactPage() {
