@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook } from 'lucide-react'
+import { Mail, Phone, MapPin, Linkedin, Instagram, Facebook } from 'lucide-react'
 import { middleEastContact, middleEastTelHref } from '@/lib/contact'
 
 const footerLinks = {
@@ -17,9 +17,21 @@ const footerLinks = {
 }
 
 const socialLinks = [
-  { icon: Linkedin, href: '#', label: 'LinkedIn' },
-  { icon: Twitter, href: '#', label: 'Twitter' },
-  { icon: Facebook, href: '#', label: 'Facebook' },
+  {
+    icon: Linkedin,
+    href: 'https://www.linkedin.com/company/black-rocks-manpower-and-human-resource-consultancy-pvt-ltd/',
+    label: 'LinkedIn',
+  },
+  {
+    icon: Instagram,
+    href: 'https://www.instagram.com/black_rocks_consultancy?igsh=MXM3amdyZHoydmZneQ==',
+    label: 'Instagram',
+  },
+  {
+    icon: Facebook,
+    href: 'https://www.facebook.com/share/1AQfcCGaLR/',
+    label: 'Facebook',
+  },
 ]
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH?.replace(/^\/+|\/+$/g, '') ?? ''
@@ -92,10 +104,6 @@ export default function Footer() {
                 <a href="tel:+917304424022" className="hover:text-primary transition-colors">+91 73044 24022</a>
               </li>
               <li className="flex items-start gap-3">
-                <MapPin size={18} className="flex-shrink-0 mt-0.5 text-primary" />
-                <span>UAE (Ajman): G1, Alshamsi Building, Behind Kualty Hospital, Abubakar Al Siddiqui Street</span>
-              </li>
-              <li className="flex items-start gap-3">
                 <Phone size={18} className="flex-shrink-0 mt-0.5 text-primary" />
                 <span>
                   {middleEastContact.name} — {middleEastContact.title}:{' '}
@@ -119,6 +127,8 @@ export default function Footer() {
                 <a
                   key={label}
                   href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={label}
                   className="w-10 h-10 rounded-lg bg-secondary/50 flex items-center justify-center hover:bg-primary transition-colors"
                 >

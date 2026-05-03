@@ -4,8 +4,9 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { MapPin, Phone, Mail, Send } from 'lucide-react'
 import { middleEastContact, middleEastTelHref, middleEastWhatsAppHref } from '@/lib/contact'
+import { submitContactForm } from '@/lib/form-submit-client'
 
-const whatsappNumber = '917304424022'
+const whatsappNumber = '917304434022'
 const whatsappMessage = 'Hello, I would like to know more about BLACK ROCKS CONSULTANCY services.'
 const middleEastWhatsAppMessage =
   'Hello, I would like to know more about BLACK ROCKS CONSULTANCY services (Middle East).'
@@ -18,11 +19,12 @@ export default function Contact() {
     e.preventDefault()
     setStatus('loading')
     try {
-      const subject = encodeURIComponent(`Website enquiry from ${formState.name}`)
-      const body = encodeURIComponent(
-        `Name: ${formState.name}\nEmail: ${formState.email}\nPhone: ${formState.phone}\n\nMessage:\n${formState.message}`
-      )
-      window.location.href = `mailto:info@blackrocksconsultancy.com?subject=${subject}&body=${body}`
+      await submitContactForm({
+        name: formState.name,
+        email: formState.email,
+        phone: formState.phone,
+        message: formState.message,
+      })
       setStatus('success')
       setFormState({ name: '', email: '', phone: '', message: '' })
     } catch {
@@ -93,15 +95,10 @@ export default function Contact() {
 
             <div>
               <h3 className="font-heading font-semibold text-lg text-dark mb-4 flex items-center gap-2">
-                <MapPin size={20} className="text-primary" />
+                <Phone size={20} className="text-primary" />
                 Middle East Contact
               </h3>
-              <p className="text-secondary leading-relaxed">
-                UAE (Ajman): G1, Alshamsi Building, Behind Kualty Hospital,
-                <br />
-                Abubakar Al Siddiqui Street
-              </p>
-              <p className="mt-3 text-secondary">
+              <p className="text-secondary">
                 <span className="font-medium text-dark">{middleEastContact.name}</span>
                 {' — '}
                 {middleEastContact.title}

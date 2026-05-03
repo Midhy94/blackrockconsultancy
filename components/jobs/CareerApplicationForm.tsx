@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { submitCareerApplication } from '@/lib/form-submit-client'
 
 type FormState = {
   name: string
@@ -34,11 +35,17 @@ export default function CareerApplicationForm() {
 
     setStatus('loading')
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500))
-      console.info('[CareerApplicationForm] submit', {
-        ...form,
-        cv: form.cv.name,
-      })
+      const fd = new FormData()
+      fd.append('name', form.name.trim())
+      fd.append('email', form.email.trim())
+      fd.append('phone', form.phone.trim())
+      fd.append('dob', form.dob)
+      fd.append('positionAppliedFor', form.positionAppliedFor.trim())
+      fd.append('currentLocation', form.currentLocation.trim())
+      fd.append('keySkills', form.keySkills.trim())
+      fd.append('website', '')
+      fd.append('attachment', form.cv)
+      await submitCareerApplication(fd)
       setStatus('success')
       setForm(initialState)
     } catch {

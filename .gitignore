@@ -10,6 +10,9 @@
 /.next/
 /out/
 
+# Local deploy bundle (regenerate with: npm run build && cd out && zip -r ../blackrocks-out.zip .)
+/blackrocks-out.zip
+
 # production
 /build
 

@@ -6,18 +6,9 @@ import { X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useLeadModal, type LeadType } from '@/contexts/LeadModalContext'
 import { servicesList } from '@/lib/services-data'
+import { submitLeadForm } from '@/lib/form-submit-client'
 
 type FieldErrors = Partial<Record<string, string>>
-
-function submitLead(payload: {
-  leadType: LeadType
-  data: Record<string, string>
-  resumeFileName?: string
-}) {
-  const route = payload.leadType === 'business' ? 'sales' : 'hr'
-  // Mock / structured hook for future API: route business → sales, individual → HR
-  console.info(`[LeadForm] route=${route}`, payload)
-}
 
 export default function LeadFormModal() {
   const { state, close } = useLeadModal()
@@ -25,6 +16,7 @@ export default function LeadFormModal() {
   const [leadType, setLeadType] = useState<LeadType>('business')
   const [errors, setErrors] = useState<FieldErrors>({})
   const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
 
   // Business fields
   const [bName, setBName] = useState('')
@@ -52,6 +44,7 @@ export default function LeadFormModal() {
       setLeadType(state.leadType)
       setPositionAppliedFor(state.jobTitle)
       setErrors({})
+      setSubmitError(null)
       document.body.style.overflow = 'hidden'
     } else {
       document.body.style.overflow = ''
@@ -95,36 +88,35 @@ export default function LeadFormModal() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     if (!validate()) return
+    setSubmitError(null)
     setSubmitting(true)
-    await new Promise((r) => setTimeout(r, 400))
-    if (leadType === 'business') {
-      submitLead({
-        leadType: 'business',
-        data: {
-          name: bName,
-          companyName,
-          email: bEmail,
-          serviceRequired,
-          message: bMessage,
-        },
-      })
-    } else {
-      submitLead({
-        leadType: 'individual',
-        data: {
-          name: iName,
-          email: iEmail,
-          phone,
-          dob,
-          positionAppliedFor,
-          currentLocation,
-          keySkills,
-        },
-        resumeFileName: resume?.name,
-      })
+    try {
+      const fd = new FormData()
+      fd.append('leadType', leadType)
+      if (leadType === 'business') {
+        fd.append('name', bName.trim())
+        fd.append('companyName', companyName.trim())
+        fd.append('email', bEmail.trim())
+        fd.append('serviceRequired', serviceRequired)
+        fd.append('message', bMessage.trim())
+      } else {
+        fd.append('name', iName.trim())
+        fd.append('email', iEmail.trim())
+        fd.append('phone', phone.trim())
+        fd.append('dob', dob)
+        fd.append('positionAppliedFor', positionAppliedFor.trim())
+        fd.append('currentLocation', currentLocation.trim())
+        fd.append('keySkills', keySkills.trim())
+        if (resume) fd.append('attachment', resume)
+      }
+      fd.append('website', '')
+      await submitLeadForm(fd)
+      close()
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
+    } finally {
+      setSubmitting(false)
     }
-    setSubmitting(false)
-    close()
   }
 
   if (!mounted) return null
@@ -339,6 +331,11 @@ export default function LeadFormModal() {
                 )}
               </div>
 
+              {submitError && (
+                <p className="text-sm text-primary" role="alert">
+                  {submitError}
+                </p>
+              )}
               <button
                 type="submit"
                 disabled={submitting}
