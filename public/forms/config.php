@@ -6,12 +6,13 @@
  */
 
 return [
-    'smtp_host' => 'mail.blackrocksconsultancy.com',
+    'smtp_host' => 'smtp.gmail.com',
     'smtp_port' => 587,
     'smtp_secure' => 'tls',
-    'smtp_user' => 'noreply@blackrocksconsultancy.com',
-    'smtp_pass' => 'your-mailbox-or-app-password',
-    'mail_from' => 'noreply@blackrocksconsultancy.com',
-    'mail_from_name' => 'BLACK ROCKS website',
-    'mail_to' => 'info@blackrocksconsultancy.com',
+    /** Must match the mailbox that owns the app password below. */
+    'smtp_user' => 'apply@blackrocksconsultancy.com',
+    'smtp_pass' => 'gsgg qkki igja anzm',
+    'mail_from' => 'apply@blackrocksconsultancy.com',
+    'mail_from_name' => 'Black Rocks Consultancy',
+    'mail_to' => 'apply@blackrocksconsultancy.com',
 ];

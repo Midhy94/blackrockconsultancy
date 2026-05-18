@@ -3,7 +3,9 @@ DirectoryIndex index.html
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  RewriteBase /demo/
+  # For root-domain deploys under public_html.
+  # If you deploy under a subfolder, change this to that folder (example: /demo/).
+  RewriteBase /
 
   # Prevent Apache content negotiation from interfering with folder routes.
   Options -MultiViews
@@ -17,3 +19,21 @@ DirectoryIndex index.html
 </IfModule>
 
 ErrorDocument 404 404.html
+
+# Reduce stale-cache issues after uploads.
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html?|php)$">
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </FilesMatch>
+</IfModule>
+
+# Keep hashed Next assets cacheable for performance.
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType application/x-javascript "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>

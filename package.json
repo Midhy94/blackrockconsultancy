@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && node scripts/sync-export-assets.js",
+    "package": "npm run build && cd out && zip -r ../blackrocks-consultancy-upload-ready.zip .",
     "start": "next start -H 0.0.0.0",
     "lint": "next lint"
   },

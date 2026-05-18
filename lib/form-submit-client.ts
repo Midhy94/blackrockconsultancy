@@ -5,11 +5,24 @@ function basePathPrefix(): string {
 }
 
 async function readJson(res: Response): Promise<Record<string, unknown> | null> {
+  const text = await res.text()
+  if (!text.trim()) return null
   try {
-    return (await res.json()) as Record<string, unknown>
+    return JSON.parse(text) as Record<string, unknown>
   } catch {
     return null
   }
+}
+
+function errorFromResponse(res: Response, data: Record<string, unknown> | null, fallback: string): string {
+  if (typeof data?.error === 'string') return data.error
+  if (res.status === 404) {
+    return 'Form handler not found. Upload the forms/ folder from the site package and ensure PHP is enabled.'
+  }
+  if (res.status >= 500) {
+    return 'Server could not send email. Check forms/config.php SMTP settings on the host.'
+  }
+  return fallback
 }
 
 export async function submitContactForm(payload: {
@@ -28,8 +41,7 @@ export async function submitContactForm(payload: {
   })
   const data = await readJson(res)
   if (!res.ok) {
-    const msg = typeof data?.error === 'string' ? data.error : 'Could not send message'
-    throw new Error(msg)
+    throw new Error(errorFromResponse(res, data, 'Could not send message'))
   }
 }
 
@@ -41,8 +53,7 @@ export async function submitCareerApplication(fd: FormData): Promise<void> {
   })
   const data = await readJson(res)
   if (!res.ok) {
-    const msg = typeof data?.error === 'string' ? data.error : 'Could not submit application'
-    throw new Error(msg)
+    throw new Error(errorFromResponse(res, data, 'Could not submit application'))
   }
 }
 
@@ -57,7 +68,6 @@ export async function submitLeadForm(fd: FormData): Promise<void> {
   })
   const data = await readJson(res)
   if (!res.ok) {
-    const msg = typeof data?.error === 'string' ? data.error : 'Could not send'
-    throw new Error(msg)
+    throw new Error(errorFromResponse(res, data, 'Could not send'))
   }
 }

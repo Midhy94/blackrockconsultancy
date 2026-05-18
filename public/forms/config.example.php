@@ -12,9 +12,10 @@ return [
     'smtp_port' => 587,
     /** tls = STARTTLS on 587; ssl = implicit SSL (usually port 465); empty = plain (not recommended) */
     'smtp_secure' => 'tls',
-    'smtp_user' => 'noreply@blackrocksconsultancy.com',
+    /** Must be the same mailbox as smtp_pass (Gmail app password or cPanel mailbox password). */
+    'smtp_user' => 'apply@blackrocksconsultancy.com',
     'smtp_pass' => 'your-mailbox-or-app-password',
-    'mail_from' => 'noreply@blackrocksconsultancy.com',
+    'mail_from' => 'apply@blackrocksconsultancy.com',
     'mail_from_name' => 'BLACK ROCKS website',
-    'mail_to' => 'info@blackrocksconsultancy.com',
+    'mail_to' => 'apply@blackrocksconsultancy.com',
 ];

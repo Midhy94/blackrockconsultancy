@@ -1,1 +1,7 @@
 Options -Indexes
+
+# CV uploads (fallback if root .user.ini is ignored).
+<IfModule mod_php.c>
+  php_value upload_max_filesize 12M
+  php_value post_max_size 12M
+</IfModule>

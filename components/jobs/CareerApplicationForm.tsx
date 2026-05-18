@@ -28,12 +28,14 @@ const initialState: FormState = {
 export default function CareerApplicationForm() {
   const [form, setForm] = useState<FormState>(initialState)
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [submitError, setSubmitError] = useState<string | null>(null)
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     if (!form.cv) return
 
     setStatus('loading')
+    setSubmitError(null)
     try {
       const fd = new FormData()
       fd.append('name', form.name.trim())
@@ -48,8 +50,9 @@ export default function CareerApplicationForm() {
       await submitCareerApplication(fd)
       setStatus('success')
       setForm(initialState)
-    } catch {
+    } catch (err) {
       setStatus('error')
+      setSubmitError(err instanceof Error ? err.message : 'Unable to submit now. Please try again.')
     }
   }
 
@@ -132,7 +135,9 @@ export default function CareerApplicationForm() {
         <p className="mt-3 text-green-600 text-sm">Application submitted successfully.</p>
       )}
       {status === 'error' && (
-        <p className="mt-3 text-red-600 text-sm">Unable to submit now. Please try again.</p>
+        <p className="mt-3 text-red-600 text-sm">
+          {submitError ?? 'Unable to submit now. Please try again.'}
+        </p>
       )}
     </form>
   )

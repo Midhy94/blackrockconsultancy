@@ -34,6 +34,9 @@ function br_forms_load_config(): array
         }
     }
     $cfg['smtp_port'] = (int) $cfg['smtp_port'];
+    if (isset($cfg['smtp_pass']) && is_string($cfg['smtp_pass'])) {
+        $cfg['smtp_pass'] = str_replace(' ', '', $cfg['smtp_pass']);
+    }
 
     return $cfg;
 }
@@ -77,8 +80,77 @@ function br_forms_send_safe(
     try {
         MimeSmtp::send($cfg, (string) $cfg['mail_to'], $replyTo, $subject, $textBody, $attachments);
     } catch (MailException $e) {
+        // Fallback for hosts that block SMTP sockets but allow local mail().
+        if (br_forms_send_with_mail($cfg, $replyTo, $subject, $textBody, $attachments)) {
+            return;
+        }
         br_forms_json(500, ['error' => 'Failed to send email. Check SMTP settings in config.php.']);
     } catch (Throwable $e) {
+        if (br_forms_send_with_mail($cfg, $replyTo, $subject, $textBody, $attachments)) {
+            return;
+        }
         br_forms_json(500, ['error' => 'Failed to send message.']);
     }
+}
+
+function br_forms_send_with_mail(
+    array $cfg,
+    string $replyTo,
+    string $subject,
+    string $textBody,
+    array $attachments = []
+): bool
+{
+    $to = (string) ($cfg['mail_to'] ?? '');
+    $from = (string) ($cfg['mail_from'] ?? '');
+    if ($to === '' || $from === '') {
+        return false;
+    }
+
+    $fromName = trim((string) ($cfg['mail_from_name'] ?? 'BLACK ROCKS website'));
+    $safeFromName = str_replace(["\r", "\n"], '', $fromName);
+    $safeFrom = str_replace(["\r", "\n"], '', $from);
+    $safeReplyTo = str_replace(["\r", "\n"], '', $replyTo);
+
+    $headers = [
+        "From: {$safeFromName} <{$safeFrom}>",
+        "Reply-To: {$safeReplyTo}",
+        'X-Mailer: PHP/' . phpversion(),
+        'MIME-Version: 1.0',
+    ];
+
+    if ($attachments === []) {
+        $headers[] = 'Content-Type: text/plain; charset=UTF-8';
+        return @mail($to, $subject, $textBody, implode("\r\n", $headers));
+    }
+
+    $boundary = 'bnd_' . bin2hex(random_bytes(12));
+    $headers[] = 'Content-Type: multipart/mixed; boundary="' . $boundary . '"';
+
+    $bodyParts = [];
+    $bodyParts[] = '--' . $boundary;
+    $bodyParts[] = 'Content-Type: text/plain; charset=UTF-8';
+    $bodyParts[] = 'Content-Transfer-Encoding: 8bit';
+    $bodyParts[] = '';
+    $bodyParts[] = $textBody;
+
+    foreach ($attachments as $attachment) {
+        $filename = basename((string) ($attachment['filename'] ?? 'attachment.bin'));
+        $filename = str_replace(["\0", "\r", "\n"], '', $filename);
+        $mime = (string) ($attachment['mime'] ?? 'application/octet-stream');
+        $content = (string) ($attachment['content'] ?? '');
+        $encoded = rtrim(chunk_split(base64_encode($content), 76, "\r\n"));
+
+        $bodyParts[] = '--' . $boundary;
+        $bodyParts[] = 'Content-Type: ' . $mime . '; name="' . $filename . '"';
+        $bodyParts[] = 'Content-Transfer-Encoding: base64';
+        $bodyParts[] = 'Content-Disposition: attachment; filename="' . $filename . '"';
+        $bodyParts[] = '';
+        $bodyParts[] = $encoded;
+    }
+
+    $bodyParts[] = '--' . $boundary . '--';
+    $body = implode("\r\n", $bodyParts);
+
+    return @mail($to, $subject, $body, implode("\r\n", $headers));
 }
